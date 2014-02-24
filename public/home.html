@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" ng-app="keiin">
+<head>
+    <meta charset="utf-8">
+    <title app-name>Keiin</title>
+    <link rel="stylesheet" href="css/app-main.css"/>
+    <link rel="stylesheet" href="css/app-list.css"/>
+    <link rel="stylesheet" href="css/app-edit.css"/>
+    <link rel="stylesheet" href="css/animations.css"/>
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css"/>
+    <script src="lib/jquery-2.1.0.min.js"></script>
+    <script src="lib/angular/bootstrap.min.js"></script>
+    <script src="lib/ZeroClipboard.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angular-resource.js"></script>
+    <script src="lib/angular/angular-strap.js"></script>
+    <script src="lib/ZeroClipboard.min.js"></script>
+    <script src="lib/angular/ng-clip.min.js"></script>
+    <script src="lib/cryptojs/aes.js"></script>
+    <script src="lib/cryptojs/pad-nopadding-min.js"></script>
+
+    <script src="js/conf.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ngClip.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/directives.js"></script> 
+</head>
+<body class="main-body-web" ng-controller="keiin.controllers.app">
+    <!--[if lt IE 7]>
+    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <header class="main-header">
+        <a class="main-home-link" href="#/main">
+            <span app-name></span>
+        </a>
+    </header>
+    <div class="main-view" ng-view></div>
+    <div style="clear:both;">version:<span app-version></span></div>
+    <div style="clear:both;">domain:<span app-domain></span></div>
+</body>
+</html>

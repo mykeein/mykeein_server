@@ -1,0 +1,127 @@
+/* 
+    Document   : app-edit
+    Created on : Jul 3, 2013, 3:27:43 AM
+    Author     : dabur
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.edit{
+    max-width: 1024px;
+    margin-left:auto;
+    margin-right:auto;
+    width:70%;
+    height: 728px;
+}
+.edit-components-div{
+    padding: 10px;
+    float: left;
+}
+.edit-app-div{
+    padding: 10px;
+    float: left;
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+.edit-component-props-div{
+    float: left;
+    position: relative;
+    text-align: left;
+    padding: 20px;
+}
+.edit-about-div{
+
+}
+.edit-app-title{
+    float: left;
+    cursor:pointer;
+    color: white;
+    position: relative;
+    left: 38px;
+    top: 80px;
+}
+.edit-app-sose{
+    float: right;
+    cursor:pointer;
+    color: white;
+    position: relative;
+    right: 35px;
+    top: 80px;
+}
+.edit-view-screen-bg{
+    background-image: url('../img/iphone.png');
+    background-size: 100% 100%;
+    width: 360px;
+    height: 600px;
+}
+.edit-view-screen{
+    clear:both;
+    list-style-type:none;
+    left: 43px;
+    top: 88px;
+    display: block;
+    background-color: grey;
+    position: relative;
+}
+.edit-view-component{
+    position:absolute;
+    display:block;
+    cursor: move;
+    text-align: left;
+}
+.edit-page-indication{
+    z-index: 1; 
+    color: white;
+    position: relative;
+    bottom: -115px;
+    left: -10px;
+    font-size: 11px;
+}
+.edit-page-indication-delimeter{
+    z-index: 1; 
+    color: white;
+    position: relative;
+    bottom: -115px;
+    left: -10px;
+    font-size: 11px;
+}
+.edit-pages-length{
+    z-index: 1; 
+    color: white;
+    position: relative;
+    bottom: -115px;
+    left: -10px;
+    font-size: 11px;
+}
+.edit-delete-page-b{
+    z-index: 1; 
+    cursor:pointer; 
+    color: blue;
+    position: relative;
+    bottom: -90px;
+    left: 186px;
+}
+.edit-previous-page-b{
+    z-index: 1; 
+    cursor:pointer; 
+    color: blue;
+    position: relative;
+    bottom: -115px;
+    left: -30px;
+}
+.edit-next-page-b{
+    z-index: 1; 
+    cursor:pointer; 
+    color: blue;
+    position: relative;
+    bottom: -115px;
+    left: 10px;
+}
+.edit-props-title{
+    
+}
+.edit-props-view{
+    position: relative;
+    text-align: left;
+}
