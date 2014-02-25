@@ -15,7 +15,7 @@ module.exports = {
     }
   },
   production: {
-    domain:"http://mykee.in",
+    domain:"http://mykee.in:3000",
     port:3000,
     db: 'mongodb://localhost/mykeein',
     root: rootPath,
