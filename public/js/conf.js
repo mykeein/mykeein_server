@@ -5,7 +5,7 @@
 // };
 
 var MConf = {
-	domain: 'http://mykee.in:3000/',
+	domain: 'http://mykee.in/',
 	version: '0.1',
 	name: 'Keiin'
 };
