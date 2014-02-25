@@ -7,12 +7,10 @@ module.exports = function (app) {
 	app.post('/notification/register/check', user.checkUsername);
 
 	var requests = require('../app/controllers/requests');
-	app.get('/', requests.index);
 	app.post('/requests/:username', requests.request);
 	app.post('/requests/my/load', requests.loadMyRequests);
 	app.post('/requests/my/block', requests.blockIp);
 	app.post('/requests/my/warn', requests.warnIp);
 	app.post('/requests/my/send', requests.sendToIp);
 	app.post('/requests/response/check', requests.responseCheck);
-
 };

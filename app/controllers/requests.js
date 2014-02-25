@@ -15,10 +15,6 @@ gcm.on('transmissionError', function(err) {
 	console.log("gcm on transmissionError - "+err);
 });
 
-exports.index = function (req, res) {
-	res.redirect('/home.html');
-}
-
 exports.request = function(req, res, next){
 	var ip = req.connection.remoteAddress;
 	var username = req.params.username;
