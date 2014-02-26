@@ -1,5 +1,14 @@
 module.exports = function (app) {
 
+	app.get('/',function(req, res, next){
+		var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
+		if (schema === 'https') {
+        	next();
+      	} else {
+        	res.redirect('https://' + req.headers.host + req.url);
+      	}
+	});
+
 	var user = require('../app/controllers/users');
 	app.post('/notification/register/new', user.newRegister);
 	app.post('/notification/register/username', user.usernameRegister);
