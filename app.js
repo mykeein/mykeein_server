@@ -43,16 +43,7 @@ if(fs.existsSync('ssl/server.key')
 		requestCert:        true,
 		rejectUnauthorized: false
 	};
-
-	https.createServer(options, function (req, res) {
-		if (req.client.authorized) {
-			res.writeHead(200, {&quot;Content-Type&quot;: &quot;application/json&quot;});
-			res.end('{&quot;status&quot;:&quot;approved&quot;}');
-		} else {
-			res.writeHead(401, {&quot;Content-Type&quot;: &quot;application/json&quot;});
-			res.end('{&quot;status&quot;:&quot;denied&quot;}');
-		}
-	}).listen(443);
+	https.createServer(options, app).listen(443);
 }
 
 app.listen(port)
