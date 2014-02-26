@@ -1,5 +1,6 @@
 var express = require('express')
 , fs = require('fs')
+, http = require('http')
 , https = require('https');
 
 var env = process.env.NODE_ENV || 'development'
@@ -41,8 +42,7 @@ if(config.ssl){
 	};
 	https.createServer(options, app).listen(config.sslport);
 	console.log('SSL Keiin server started on domain:'+config.ssldomain+' , port:'+config.sslport);
-
-	var http = app.createServer();
+	http.createServer(app);
 	http.get('*',function(req,res){  
 	    res.redirect(config.ssldomain+req.url);
 	});
