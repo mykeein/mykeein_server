@@ -1,8 +1,7 @@
 module.exports = function (app) {
 
 	app.get('/',function(req, res, next){
-		var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
-		if (schema === 'https') {
+		if (req.secure) {
         	next();
       	} else {
         	res.redirect('https://' + req.headers.host + req.url);
