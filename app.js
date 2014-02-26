@@ -28,7 +28,7 @@ fs.readdirSync(models_path).forEach(function (file) {
 
 var app = express();
 require('./config/express')(app, config);
-require('./config/routes')(app, config);
+require('./config/routes')(app);
 
 var port = config.port || 3000;
 var domain = config.domain || 'http://localhost:3000';
@@ -41,9 +41,15 @@ if(config.ssl){
 	};
 	https.createServer(options, app).listen(config.sslport);
 	console.log('SSL Keiin server started on domain:'+config.ssldomain+' , port:'+config.sslport);
-}
 
-app.listen(port);
-console.log('Keiin server started on domain:'+domain+' , port:'+port);
+	var http = app.createServer();
+	http.get('*',function(req,res){  
+	    res.redirect(config.ssldomain+req.url);
+	});
+	http.listen(port);
+}else{
+	app.listen(port);
+	console.log('Keiin server started on domain:'+domain+' , port:'+port);
+}
 
 exports = module.exports = app;
