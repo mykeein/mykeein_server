@@ -42,11 +42,12 @@ if(config.ssl){
 	};
 	https.createServer(options, app).listen(config.sslport);
 	http.createServer(function(req, res){
-	     res.writeHead(301, {
+	   	res.writeHead(301, {
 	       'Content-Type': 'text/plain', 
 	       'Location':'https://'+req.headers.host+req.url
-	     res.end('Redirecting to SSL\n');
-	}).listen(80);
+	   	});
+	    res.end('Redirecting to SSL\n');
+	}).listen(port);
     console.log('SSL Keiin server started on domain:'+config.ssldomain+' , port:'+config.sslport);
 }else{
 	app.listen(port);
