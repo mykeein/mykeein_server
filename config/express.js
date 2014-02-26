@@ -59,13 +59,6 @@
     // connect flash for flash messages
     app.use(flash())
     
-    // app.use (function (req, res, next) {
-    //   if (req.secure) {
-    //     next();
-    //   } else {
-    //     res.redirect('https://' + req.headers.host + req.url);
-    //   }
-    // });
     // routes should be at the last
     app.use(app.router)
 

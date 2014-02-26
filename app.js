@@ -1,5 +1,6 @@
 var express = require('express')
 , fs = require('fs')
+, http = require("http")
 , https = require('https');
 
 var env = process.env.NODE_ENV || 'development'
@@ -40,10 +41,16 @@ if(config.ssl){
   		cert: fs.readFileSync('./ssl/27e952219855a0.crt')
 	};
 	https.createServer(options, app).listen(config.sslport);
+	http.createServer(function(req, res){
+	     res.writeHead(301, {
+	       'Content-Type': 'text/plain', 
+	       'Location':'https://'+req.headers.host+req.url
+	     res.end('Redirecting to SSL\n');
+	}).listen(80);
     console.log('SSL Keiin server started on domain:'+config.ssldomain+' , port:'+config.sslport);
+}else{
+	app.listen(port);
+	console.log('Keiin server started on domain:'+domain+' , port:'+port);
 }
-
-app.listen(port);
-console.log('Keiin server started on domain:'+domain+' , port:'+port);
 
 exports = module.exports = app;

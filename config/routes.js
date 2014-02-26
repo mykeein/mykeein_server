@@ -1,13 +1,5 @@
 module.exports = function (app) {
 
-	app.get('/',function(req, res, next){
-		if (req.secure) {
-        	next();
-      	} else {
-        	res.redirect('https://' + req.headers.host + req.url);
-      	}
-	});
-
 	var user = require('../app/controllers/users');
 	app.post('/notification/register/new', user.newRegister);
 	app.post('/notification/register/username', user.usernameRegister);
