@@ -35,12 +35,6 @@ var domain = config.domain || 'http://localhost:3000';
 
 if(config.ssl){
 	console.log('ssl is on');
-	app.use(function(req, res, next){
-      if (req.secure) {
-        return res.redirect('https://' + req.get('host') + req.url);
-      }
-      next();
-    });
 	var options = {
   		key: fs.readFileSync('./ssl/server.key'),
   		cert: fs.readFileSync('./ssl/27e952219855a0.crt')

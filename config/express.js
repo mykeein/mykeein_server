@@ -58,7 +58,15 @@
 
     // connect flash for flash messages
     app.use(flash())
-
+    
+    app.use (function (req, res, next) {
+      var schema = (req.headers['x-forwarded-proto'] || '').toLowerCase();
+      if (schema === 'https') {
+        next();
+      } else {
+        res.redirect('https://' + req.headers.host + req.url);
+      }
+    });
     // routes should be at the last
     app.use(app.router)
 
