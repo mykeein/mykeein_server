@@ -83,14 +83,5 @@
     app.use(function(req, res, next){
       res.status(404).render('404.html', { url: req.originalUrl, error: 'Not found' })
     })
-    
-    app.use(function(req, res, next){
-      if (config.ssl&&!req.secure) {
-        //FYI this should work for local development as well
-        return res.redirect('https://' + req.get('host') + req.url);
-      }
-      next();
-    });
-
   })
 }

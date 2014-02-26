@@ -1,4 +1,5 @@
 module.exports = function (app) {
+
 	var user = require('../app/controllers/users');
 	app.post('/notification/register/new', user.newRegister);
 	app.post('/notification/register/username', user.usernameRegister);

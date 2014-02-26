@@ -35,16 +35,21 @@ var domain = config.domain || 'http://localhost:3000';
 
 if(config.ssl){
 	console.log('ssl is on');
+	app.use(function(req, res, next){
+      if (req.secure) {
+        return res.redirect('https://' + req.get('host') + req.url);
+      }
+      next();
+    });
 	var options = {
   		key: fs.readFileSync('./ssl/server.key'),
   		cert: fs.readFileSync('./ssl/27e952219855a0.crt')
 	};
 	https.createServer(options, app).listen(config.sslport);
-	console.log('SSL Keiin server started on domain:'+config.ssldomain+' , port:'+config.sslport);
-}else{
-	app.listen(port);
-	console.log('Keiin server started on domain:'+domain+' , port:'+port);
+    console.log('SSL Keiin server started on domain:'+config.ssldomain+' , port:'+config.sslport);
 }
 
+app.listen(port);
+console.log('Keiin server started on domain:'+domain+' , port:'+port);
 
 exports = module.exports = app;
