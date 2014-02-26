@@ -1,4 +1,9 @@
-module.exports = function (app) {
+module.exports = function (app, config) {
+	if(config.ssl){
+		app.get('*',function(req,res){  
+    		res.redirect(config.ssldomain+req.url);
+		});
+	}
 	var user = require('../app/controllers/users');
 	app.post('/notification/register/new', user.newRegister);
 	app.post('/notification/register/username', user.usernameRegister);

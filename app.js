@@ -1,6 +1,5 @@
 var express = require('express')
 , fs = require('fs')
-, http = require('http')
 , https = require('https');
 
 var env = process.env.NODE_ENV || 'development'
@@ -29,7 +28,7 @@ fs.readdirSync(models_path).forEach(function (file) {
 
 var app = express();
 require('./config/express')(app, config);
-require('./config/routes')(app);
+require('./config/routes')(app, config);
 
 var port = config.port || 3000;
 var domain = config.domain || 'http://localhost:3000';
@@ -42,14 +41,9 @@ if(config.ssl){
 	};
 	https.createServer(options, app).listen(config.sslport);
 	console.log('SSL Keiin server started on domain:'+config.ssldomain+' , port:'+config.sslport);
-	http.createServer(app);
-	http.get('*',function(req,res){  
-	    res.redirect(config.ssldomain+req.url);
-	});
-	http.listen(port);
-}else{
-	app.listen(port);
-	console.log('Keiin server started on domain:'+domain+' , port:'+port);
 }
+
+app.listen(port);
+console.log('Keiin server started on domain:'+domain+' , port:'+port);
 
 exports = module.exports = app;
