@@ -34,18 +34,27 @@ var domain = config.domain || '';
 
 if(config.ssl){
 	console.log('ssl is on');
-	if(fs.existsSync(config.rootPath+'/ssl/server.key')
-		&&fs.existsSync(config.rootPath+'/ssl/mykeein.pem')
-		&&fs.existsSync(config.rootPath+'/ssl/27e952219855a0.crt')
-		&&fs.existsSync(config.rootPath+'/ssl/gd_bundle-g2-g1.crt')){
-		var httpsOptions = {
-			key:fs.readFileSync(config.rootPath+'/ssl/server.key'),
-			cert:fs.readFileSync(config.rootPath+'/ssl/mykeein.pem'),
-			ca:[ fs.readFileSync(config.rootPath+'/ssl/27e952219855a0.crt'), fs.readFileSync(config.rootPath+'/ssl/gd_bundle-g2-g1.crt') ]
-		};
-		https.createServer(httpsOptions, app).listen(443);
-		console.log('SSL Keiin server started on domain:'+domain+' , port:'+443);
-	}	
+	// if(fs.existsSync(config.rootPath+'/ssl/server.key')
+	// 	&&fs.existsSync(config.rootPath+'/ssl/mykeein.pem')
+	// 	&&fs.existsSync(config.rootPath+'/ssl/27e952219855a0.crt')
+	// 	&&fs.existsSync(config.rootPath+'/ssl/gd_bundle-g2-g1.crt')){
+	// 	var httpsOptions = {
+	// 		key:fs.readFileSync(config.rootPath+'/ssl/server.key'),
+	// 		cert:fs.readFileSync(config.rootPath+'/ssl/mykeein.pem'),
+	// 		ca:[ fs.readFileSync(config.rootPath+'/ssl/27e952219855a0.crt'), fs.readFileSync(config.rootPath+'/ssl/gd_bundle-g2-g1.crt') ]
+	// 	};
+	// 	https.createServer(httpsOptions, app).listen(443);
+	// 	console.log('SSL Keiin server started on domain:'+domain+' , port:'+443);
+	// }	
+	var options = {
+  		key: fs.readFileSync(config.rootPath+'/ssl/server.key'),
+  		cert: fs.readFileSync(config.rootPath+'/ssl/27e952219855a0.crt')
+	};
+
+	https.createServer(options, function (req, res) {
+  		res.writeHead(200);
+  		res.end("hello world\n");
+	}).listen(443);
 }
 
 app.listen(port);
