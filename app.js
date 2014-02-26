@@ -38,7 +38,7 @@ if(fs.existsSync('ssl/server.key')
 	&&fs.existsSync('ssl/gd_bundle-g2-g1.crt')){
 	var options = {
 		key:fs.readFileSync('ssl/server.key'),
-		cert:fs.readFileSync('ssl/server.crt'),
+		cert:fs.readFileSync('ssl/mykeein.pem'),
 		ca:[fs.readFileSync('ssl/27e952219855a0.crt'), fs.readFileSync('ssl/gd_bundle-g2-g1.crt')],
 		requestCert:        true,
 		rejectUnauthorized: false
