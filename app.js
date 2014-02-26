@@ -4,34 +4,36 @@ var express = require('express')
 
 var env = process.env.NODE_ENV || 'development'
 , config = require('./config/config')[env]
-, mongoose = require('mongoose')
+, mongoose = require('mongoose');
 
 if (!env || 
 	(env!='development' && env!='production')){
 	err = 'Please set NODE_ENV to development/production. '
 +'(in windows you can just write in a terminal "set NODE_ENV=development")';
-throw err
+throw err;
 }else{
-	console.log('configuration '+env+' loaded.')
+	console.log('configuration '+env+' loaded.');
 }
 
-mongoose.connect(config.db)
+mongoose.connect(config.db);
 mongoose.connection.on('error',function(err){
 	throw err
-})
+});
 
-var models_path = __dirname + '/app/models'
+var models_path = __dirname + '/app/models';
 fs.readdirSync(models_path).forEach(function (file) {
-	require(models_path+'/'+file)
-})
+	require(models_path+'/'+file);
+});
 
-var app = express()
-require('./config/express')(app, config)
-require('./config/routes')(app)
+var app = express();
+require('./config/express')(app, config);
+require('./config/routes')(app);
 
-var port = config.port || 3000
-var domain = config.domain || ''
+var port = config.port || 3000;
+var domain = config.domain || '';
+
 if(config.ssl){
+	console.log('ssl is on');
 	if(fs.existsSync(config.rootPath+'/ssl/server.key')
 		&&fs.existsSync(config.rootPath+'/ssl/mykeein.pem')
 		&&fs.existsSync(config.rootPath+'/ssl/27e952219855a0.crt')
@@ -42,10 +44,11 @@ if(config.ssl){
 			ca:[ fs.readFileSync(config.rootPath+'/ssl/27e952219855a0.crt'), fs.readFileSync(config.rootPath+'/ssl/gd_bundle-g2-g1.crt') ]
 		};
 		https.createServer(httpsOptions, app).listen(443);
+		console.log('SSL Keiin server started on domain:'+domain+' , port:'+443);
 	}	
 }
 
-app.listen(port)
-console.log('Keiin server started on domain:'+domain+' , port:'+port)
+app.listen(port);
+console.log('Keiin server started on domain:'+domain+' , port:'+port);
 
-exports = module.exports = app
+exports = module.exports = app;
