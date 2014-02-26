@@ -34,12 +34,11 @@ var domain = config.domain || ''
 
 if(fs.existsSync('ssl/server.key')
 	&&fs.existsSync('ssl/mykeein.pem')
-	&&fs.existsSync('ssl/27e952219855a0.crt')
-	&&fs.existsSync('ssl/gd_bundle-g2-g1.crt')){
+	&&fs.existsSync('ssl/27e952219855a0.crt')){
 	var options = {
 		key:fs.readFileSync('ssl/server.key'),
 		cert:fs.readFileSync('ssl/mykeein.pem'),
-		ca:[fs.readFileSync('ssl/27e952219855a0.crt'), fs.readFileSync('ssl/gd_bundle-g2-g1.crt')],
+		ca:fs.readFileSync('ssl/27e952219855a0.crt'),
 		requestCert:        true,
 		rejectUnauthorized: false
 	};
