@@ -35,22 +35,12 @@ var domain = config.domain || '';
 
 if(config.ssl){
 	console.log('ssl is on');
-	var httpsOptions = {
-		key:fs.readFileSync('./ssl/server.key'),
-		cert:fs.readFileSync('./ssl/mykeein.pem'),
-		ca:[ fs.readFileSync('./ssl/27e952219855a0.crt'), fs.readFileSync('./ssl/gd_bundle-g2-g1.crt') ]
+	var options = {
+  		key: fs.readFileSync('./ssl/server.key'),
+  		cert: fs.readFileSync('./ssl/27e952219855a0.crt')
 	};
-	https.createServer(httpsOptions, app).listen(443);
+	https.createServer(options, app).listen(443);
 	console.log('SSL Keiin server started on domain:'+domain+' , port:'+443);
-	// var options = {
- //  		key: fs.readFileSync('./ssl/server.key'),
- //  		cert: fs.readFileSync('./ssl/27e952219855a0.crt')
-	// };
-
-	// https.createServer(options, function (req, res) {
- //  		res.writeHead(200);
- //  		res.end("hello world\n");
-	// }).listen(443);
 }
 
 app.listen(port);
