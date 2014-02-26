@@ -28,7 +28,7 @@ fs.readdirSync(models_path).forEach(function (file) {
 
 var app = express();
 require('./config/express')(app, config);
-require('./config/routes')(app, config);
+require('./config/routes')(app);
 
 var port = config.port || 3000;
 var domain = config.domain || 'http://localhost:3000';
