@@ -31,7 +31,7 @@ require('./config/express')(app, config);
 require('./config/routes')(app);
 
 var port = config.port || 3000;
-var domain = config.domain || '';
+var domain = config.domain || 'http://localhost:3000';
 
 if(config.ssl){
 	console.log('ssl is on');
@@ -39,8 +39,8 @@ if(config.ssl){
   		key: fs.readFileSync('./ssl/server.key'),
   		cert: fs.readFileSync('./ssl/27e952219855a0.crt')
 	};
-	https.createServer(options, app).listen(443);
-	console.log('SSL Keiin server started on domain:'+domain+' , port:'+443);
+	https.createServer(options, app).listen(config.sslport);
+	console.log('SSL Keiin server started on domain:'+config.ssldomain+' , port:'+config.sslport);
 }
 
 app.listen(port);

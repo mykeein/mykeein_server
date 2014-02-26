@@ -14,7 +14,7 @@ services.factory('KeiinService', [ '$http', function(http) {
     var server = MConf.domain;
     return {
         sendRequest: function(username,cb) {
-            http.post(server + 'requests/' + username)
+            http.post(server + '/requests/' + username)
             .success(
                 function(data, status, headers, config) {
                     cb(data);
@@ -26,7 +26,7 @@ services.factory('KeiinService', [ '$http', function(http) {
         },
         checkResponse: function(requestId,cb) {
             var body = { requestId:requestId };
-            http.post(server + 'requests/response/check',body)
+            http.post(server + '/requests/response/check',body)
             .success(
                 function(data, status, headers, config) {
                     cb(data);

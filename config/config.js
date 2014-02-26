@@ -9,6 +9,8 @@ module.exports = {
     domain:"http://localhost:3000",
     port:3000,
     ssl:false,
+    ssldomain:"https://localhost",
+    sslport:443,
     db: 'mongodb://localhost/mykeein',
     root: rootPath,
     app: {
@@ -19,6 +21,8 @@ module.exports = {
     domain:"http://mykee.in",
     port:80,
     ssl:true,
+    ssldomain:"https://mykee.in",
+    sslport:443,
     db: 'mongodb://localhost/mykeein',
     root: rootPath,
     app: {
