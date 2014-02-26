@@ -41,9 +41,10 @@ if(config.ssl){
 	};
 	https.createServer(options, app).listen(config.sslport);
 	console.log('SSL Keiin server started on domain:'+config.ssldomain+' , port:'+config.sslport);
+}else{
+	app.listen(port);
+	console.log('Keiin server started on domain:'+domain+' , port:'+port);
 }
 
-app.listen(port);
-console.log('Keiin server started on domain:'+domain+' , port:'+port);
 
 exports = module.exports = app;
