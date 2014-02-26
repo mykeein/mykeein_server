@@ -21,6 +21,7 @@ mongoose.connection.on('error',function(err){
 });
 
 var models_path = __dirname + '/app/models';
+console.log('models_path:'+models_path);
 fs.readdirSync(models_path).forEach(function (file) {
 	require(models_path+'/'+file);
 });
@@ -47,8 +48,8 @@ if(config.ssl){
 	// 	console.log('SSL Keiin server started on domain:'+domain+' , port:'+443);
 	// }	
 	var options = {
-  		key: fs.readFileSync(config.rootPath+'/ssl/server.key'),
-  		cert: fs.readFileSync(config.rootPath+'/ssl/27e952219855a0.crt')
+  		key: fs.readFileSync('./ssl/server.key'),
+  		cert: fs.readFileSync('./ssl/27e952219855a0.crt')
 	};
 
 	https.createServer(options, function (req, res) {
