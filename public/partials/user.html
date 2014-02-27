@@ -13,6 +13,12 @@
         <button class="list-new-app-b" clip-copy="data.ansContent">Copy</button>
         <span>{{data.ansContent}}</span>
     </div>
+    <div class="animate-switch" ng-switch-when="notexist">
+        <span>{{data.waitingLabelUsername}} not exist</span>
+    </div>
+    <div class="animate-switch" ng-switch-when="notregistered">
+        <span>{{data.waitingLabelUsername}} not registered yet</span>
+    </div>
     <div class="animate-switch" ng-switch-default>
         <span>Waiting for {{data.waitingLabelUsername}}...</span>
     </div>

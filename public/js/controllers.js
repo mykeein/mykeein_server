@@ -17,7 +17,7 @@ controllers.controller('keiin.controllers.user', ['$scope', '$routeParams', 'Kei
     scope.data = {};
     scope.data.ansContent = '';
     scope.data.waitingLabelUsername = routeParams.username;
-    scope.data.selections = ['decrypt', 'finishDecrypt', 'waiting', 'blocked', 'warned'];
+    scope.data.selections = ['decrypt', 'finishDecrypt', 'waiting', 'blocked', 'warned', 'notexist', 'notregistered'];
     scope.data.selection = scope.data.selections[2];
     scope.data.code = "code";
     KeiinService.sendRequest(routeParams.username, function(ans) {
@@ -28,6 +28,12 @@ controllers.controller('keiin.controllers.user', ['$scope', '$routeParams', 'Kei
         }
         if(scope.data.ans.status=='block'){
             scope.data.selection = scope.data.selections[3];
+        }
+        if(scope.data.ans.status=='notexist'){
+            scope.data.selection = scope.data.selections[5];
+        }
+        if(scope.data.ans.status=='notregistered'){
+            scope.data.selection = scope.data.selections[6];
         }
     });
 

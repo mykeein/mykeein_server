@@ -56,10 +56,12 @@ exports.request = function(req, res, next){
 							return next(err);
 						}
 						if(user==null){
-							return next(new Error("not exists user{username:"+username+" }"));
+							var ans = { status:'notexist',data:request };
+							return res.jsonp(ans);
 						} 
 						if(user.registerId==null){
-							return next(new Error("user{username:"+username+" } not exists registerId"));
+							var ans = { status:'notregistered',data:request };
+							return res.jsonp(ans);
 						}
 						var request = new Request({
 							ip:ip,
@@ -89,7 +91,7 @@ exports.request = function(req, res, next){
 exports.loadMyRequests = function(req, res, next){
 	var username = req.body.username;
 	Request.find(
-		{ username:username, 
+		{ username:username,
 			$or: [ 
 			{ "requestData.dataType":Request.dataType.open }, 
 			{ "requestData.dataType":Request.dataType.warn } 
