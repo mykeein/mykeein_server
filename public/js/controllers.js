@@ -26,6 +26,9 @@ controllers.controller('keiin.controllers.user', ['$scope', '$routeParams', 'Kei
             scope.data.selection = scope.data.selections[2];
             scope.waitTillResponse(scope.data.ans.data._id);
         }
+        if(scope.data.ans.status=='block'){
+            scope.data.selection = scope.data.selections[3];
+        }
     });
 
     scope.waitTillResponse = function(requestId) {

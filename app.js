@@ -48,10 +48,10 @@ if(config.ssl){
 	   	});
 	    res.end('Redirecting to SSL\n');
 	}).listen(port);
-    console.log('SSL Keiin server started on domain:'+config.ssldomain+' , port:'+config.sslport);
+    console.log('SSL MyKeeIn server started on domain:'+config.ssldomain+' , port:'+config.sslport);
 }else{
 	app.listen(port);
-	console.log('Keiin server started on domain:'+domain+' , port:'+port);
+	console.log('MyKeeIn server started on domain:'+domain+' , port:'+port);
 }
 
 exports = module.exports = app;

@@ -15,49 +15,86 @@ gcm.on('transmissionError', function(err) {
 	console.log("gcm on transmissionError - "+err);
 });
 
+//(1 * 60 * 1000 = min)
+var cleanInterval = 10 * 60 * 1000; 
+var oldInterval = 10 * 60 * 1000;
+function cleanJob(){
+	setInterval(function() {
+		removeOldRequests();
+	}, cleanInterval);
+}
+
+function removeOldRequests(){
+	var date = new Date(new Date().getTime()-oldInterval);
+	console.log("Clean reaquests date:"+date.toString());
+	Request.remove({ updated:{ $lt:date } },
+		function(err){
+			if (err) 
+				console.log('destroy request failed. err:'+err);
+			cleanJob();
+		});
+}
+
+cleanJob();
+
 exports.request = function(req, res, next){
 	var ip = req.connection.remoteAddress;
 	var username = req.params.username;
-	User.findOne(
-		{ username:username },
-		function(err,user){
+	Request.find(
+		{ ip:ip, username:username, "requestData.dataType":Request.dataType.block },function(err,requests){
 			if (err) {
 				return next(err);
 			}
-			if(user==null){
-				return next(new Error("not exists user{username:"+username+" }"));
-			} 
-			if(user.registerId==null){
-				return next(new Error("user{username:"+username+" } not exists registerId"));
-			}
-			var request = new Request({
-				ip:ip,
-				username:username,
-				requestData:{ dataType:Request.dataType.open }
-			});
-			request.save(function (err,request) {
-				if (err){
-					return next(err);
-				}
-				gcm.send({
-					registrationId: user.registerId,
-					collapseKey: 'data request',
-					delayWhileIdle: true,
-					timeToLive: 1800,
-					data: request
-				});
-				var ans = { status:'success',data:request };
+			if(requests!=null && requests.length>0){	
+				var ans = { status:'block', data:requests[0] };
 				return res.jsonp(ans);
-			});
-			
+			}else{
+				User.findOne(
+					{ username:username },
+					function(err,user){
+						if (err) {
+							return next(err);
+						}
+						if(user==null){
+							return next(new Error("not exists user{username:"+username+" }"));
+						} 
+						if(user.registerId==null){
+							return next(new Error("user{username:"+username+" } not exists registerId"));
+						}
+						var request = new Request({
+							ip:ip,
+							username:username,
+							requestData:{ dataType:Request.dataType.open }
+						});
+						request.save(function (err,request) {
+							if (err){
+								return next(err);
+							}
+							gcm.send({
+								registrationId: user.registerId,
+								collapseKey: 'data request',
+								delayWhileIdle: true,
+								timeToLive: 1800,
+								data: request
+							});
+							var ans = { status:'success',data:request };
+							return res.jsonp(ans);
+						});
+
+					});
+			}
 		});
 };
 
 exports.loadMyRequests = function(req, res, next){
 	var username = req.body.username;
 	Request.find(
-		{ username:username },
-		function(err,requests){
+		{ username:username, 
+			$or: [ 
+			{ "requestData.dataType":Request.dataType.open }, 
+			{ "requestData.dataType":Request.dataType.warn } 
+			] 
+		},function(err,requests){
 			if (err) {
 				return next(err);
 			}
@@ -176,26 +213,23 @@ exports.responseCheck = function(req, res, next){
 	var ip = req.connection.remoteAddress;
 	var requestId = req.body.requestId;
 	Request.findOne(
-		{ _id:requestId , responded:true },
+		{ _id:requestId, responded:true, ip:ip },
 		function(err,request){
 			if (err) {
 				return next(err);
 			}
 			if(request==null){
 				return res.jsonp({ status:'wait' });
-			} 
-			if(request.ip==ip){
-				if(request.requestData.dataType != Request.dataType.warn){
-					Request.remove({ _id:request._id },
+			}else{
+				var ans = { status:'success', data:request };
+				if(request.requestData.dataType == Request.dataType.response){
+					Request.remove({ _id:requestId },
 						function(err){
 							if (err) 
 								console.log('destroy request failed. err:'+err);
 						});
 				}
-				var ans = { status:'success', data:request };
 				return res.jsonp(ans);
-			}else{
-				return next(new Error("not allowed data request. ip:"+ip+" , requestId:"+requestId));
 			}
 		});
 };
