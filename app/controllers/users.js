@@ -14,7 +14,14 @@ exports.newRegister = function (req, res, next) {
       if(users!=null){
         console.log('users.length:'+users.length);
         if(users.length>0){
-          return next(new Error("exists user{username:"+username+"}, {registerId:"+registerId+"}"));  
+          for (var i = users.length - 1; i >= 0; i--) {
+            if(users[i].username == username && users[i].registerId == registerId){
+              var ans1 = { status:'success', data:user };
+              return res.jsonp(ans1);
+            }
+          };
+          var ans = { status:'exist' };
+          return res.jsonp(ans);
         }
       }
       var newUser = new User({ username:username, registerId:registerId });
@@ -22,8 +29,8 @@ exports.newRegister = function (req, res, next) {
         if (err){
           return next(err);
         }
-        var ans = { status:'success', data:user };
-        return res.jsonp(ans);
+        var ans2 = { status:'success', data:user };
+        return res.jsonp(ans2);
       });
     });
 };
