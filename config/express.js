@@ -48,13 +48,13 @@
     app.use(express.methodOverride())
 
     // express/mongo session storage
-    app.use(express.session({
-      secret: 'keiin-secret-Keiin2014',
-      store: new mongoStore({
-        url: config.db,
-        collection : 'sessions'
-      })
-    }))
+    // app.use(express.session({
+    //   secret: 'keiin-secret-Keiin2014',
+    //   store: new mongoStore({
+    //     url: config.db,
+    //     collection : 'sessions'
+    //   })
+    // }))
 
     // connect flash for flash messages
     app.use(flash())
