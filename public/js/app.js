@@ -5,7 +5,6 @@ config(['ngClipProvider', '$routeProvider', '$locationProvider', function(ngClip
 	$routeProvider
 	.when('/', {templateUrl: 'partials/main.html', controller: 'keiin.controllers.main'})
 	.when('/:email', {templateUrl: 'partials/user.html', controller: 'keiin.controllers.user'})
-	.when('/approve/:approveId', {templateUrl: 'partials/approve.html', controller: 'keiin.controllers.approve'})
 	.otherwise({redirectTo: '/'});
 	ngClipProvider.setPath("/lib/ZeroClipboard.swf");
 	$locationProvider.html5Mode(true);

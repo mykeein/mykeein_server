@@ -5,7 +5,6 @@ module.exports = function (app) {
 	app.post('/api/user/updateregisterid', user.updateRegisterId);
 	app.post('/api/user/updateemail', user.updateEmail);
 	app.post('/api/user/check', user.check);
-	app.post('/api/user/approve/:approveId', user.approve);
 	var requests = require('../app/controllers/requests');
 	app.post('/api/requests/load', requests.loadMyRequests);
 	app.post('/api/requests/block', requests.blockIp);
@@ -13,4 +12,5 @@ module.exports = function (app) {
 	app.post('/api/requests/send', requests.sendToIp);
 	app.post('/api/requests/check', requests.responseCheck);
 	app.post('/api/requests/:email', requests.request);
+	app.get('/approve/:approveId', user.approve);
 };

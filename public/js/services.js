@@ -13,17 +13,6 @@ services.value('name', MConf.name);
 services.factory('KeiinService', [ '$http', function(http) {
     var server = MConf.domain;
     return {
-        sendApprove: function(approveId,cb) {
-            http.post(server + '/api/user/approve/' + approveId)
-            .success(
-                function(data, status, headers, config) {
-                    cb(data);
-                })
-            .error(
-                function(data, status, headers, config) {
-                    console.log("(sendRequest)ERROR: Could not get data. data:" + data + ",status:" + status);
-                });
-        },
         sendRequest: function(email,cb) {
             http.post(server + '/api/requests/' + email)
             .success(

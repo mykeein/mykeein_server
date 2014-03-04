@@ -19,8 +19,6 @@ gcm.on('transmissionError', function(err) {
 //(1 * 60 * 1000 = min)
 var cleanInterval = 10 * 60 * 1000; 
 var oldInterval = 10 * 60 * 1000;
-var date = new Date(new Date().getTime()-oldInterval);
-var nowTime = new Date().getTime();
 function cleanJob(){
 	setInterval(function() {
 		removeOldRequests();
@@ -28,8 +26,8 @@ function cleanJob(){
 }
 
 function removeOldRequests(){
-	nowTime = new Date().getTime();
-	date = new Date(nowTime-oldInterval);
+	var nowTime = new Date().getTime();
+	var date = new Date(new Date().getTime()-oldInterval);
 	console.log("Clean older than date:"+date.toString());
 	Request.remove({ updated:{ $lt:date } },function(err){
 		if (err) 

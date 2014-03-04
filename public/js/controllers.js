@@ -89,18 +89,3 @@ controllers.controller('keiin.controllers.user', ['$scope', '$routeParams', 'Kei
         return keyData;
     }
 }]);
-
-controllers.controller('keiin.controllers.approve', ['$scope', '$routeParams', 'KeiinService', function(scope, routeParams, KeiinService) {
-    scope.data = {};
-    scope.data.selections = ['inprogress', 'success', 'expired'];
-    scope.data.selection = scope.data.selections[0];
-    KeiinService.sendApprove(routeParams.approveId, function(ans) {
-        scope.data.ans = ans;
-        if(scope.data.ans.status=='success'){
-            scope.data.selection = scope.data.selections[1];
-        }
-        if(scope.data.ans.status=='expired'){
-            scope.data.selection = scope.data.selections[2];
-        }
-    });
-}]);

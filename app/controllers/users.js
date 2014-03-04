@@ -126,14 +126,14 @@ exports.approve = function (req, res, next) {
             if (err){
               return next(err);
             }
-            var ans2 = { status:'success' };
-            return res.jsonp(ans2);
+            res.status(200).render('approve.html', { state: 'success ! Thank you using mykee.in' })
+            return;
           });
         });
       });
     }else{
-      var ans1 = { status:'approve_expired' };
-      return res.jsonp(ans1);
+      res.status(200).render('approve.html', { state: 'expired. resend approve from mykee.in app again.' })
+      return;
     }
   });
 }
