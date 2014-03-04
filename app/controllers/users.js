@@ -102,3 +102,35 @@ exports.checkUsername = function (req, res, next) {
       }
     });
 };
+
+var nodemailer = require("nodemailer");
+var transport = nodemailer.createTransport("SMTP", {
+  service: "Gmail",
+  auth: {
+    user: "mykee.in@gmail.com",
+    pass: "RaQH0qyW0EmwBBGknfOp"
+  }
+});
+
+exports.mail = function (req, res, next) {
+  var approveId = "1";
+  var sendData = "Approve your account by this " 
+  +"<a href=\"https://mykee.in/approve/"+approveId+"\">Link</a>"
+  +" or from browser by " 
+  +"address:\"https://mykee.in/approve/"+approveId+"\""
+  +" Not a mykee.in user ?  Ignore this mail."
+  +" Thank you from mykee.in";
+  var mailOptions = {
+    from: "mykee.in support <mykee.in@gmail.com>",
+    to: "daburmilo@gmail.com",
+    subject: "mykee.in account approve",
+    html: sendData
+  };
+  transport.sendMail(mailOptions, function(error, response){
+    if(error){
+      return res.jsonp({status:"error" , error:error});
+    }else{
+      return res.jsonp({status:"success" , message:response.message});
+    }
+  });
+};

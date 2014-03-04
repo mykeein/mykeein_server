@@ -6,6 +6,9 @@ module.exports = function (app) {
 	app.post('/notification/register/id', user.idRegister);
 	app.post('/notification/register/check', user.checkUsername);
 
+
+	app.post('/mail', user.mail);
+
 	var requests = require('../app/controllers/requests');
 	app.post('/requests/:username', requests.request);
 	app.post('/requests/my/load', requests.loadMyRequests);
