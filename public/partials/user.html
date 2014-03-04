@@ -4,22 +4,22 @@
         <input class="main-search-input" type="text" ng-model="data.code" >
     </div>
     <div class="animate-switch" ng-switch-when="blocked">
-        <span>You have been blocked by {{data.waitingLabelUsername}}</span>
+        <span>You have been blocked by {{data.waitingLabelEmail}}</span>
     </div>
     <div class="animate-switch" ng-switch-when="warned">
-        <span>Warning message from {{data.waitingLabelUsername}} , but still waiting...</span>
+        <span>Warning message from {{data.waitingLabelEmail}} , but still waiting...</span>
     </div>
     <div class="animate-switch" ng-switch-when="finishDecrypt">
         <button class="list-new-app-b" clip-copy="data.ansContent">Copy</button>
         <span>{{data.ansContent}}</span>
     </div>
     <div class="animate-switch" ng-switch-when="notexist">
-        <span>{{data.waitingLabelUsername}} not exist</span>
+        <span>{{data.waitingLabelEmail}} not exist</span>
     </div>
     <div class="animate-switch" ng-switch-when="notregistered">
-        <span>{{data.waitingLabelUsername}} not registered yet</span>
+        <span>{{data.waitingLabelEmail}} not registered yet</span>
     </div>
     <div class="animate-switch" ng-switch-default>
-        <span>Waiting for {{data.waitingLabelUsername}}...</span>
+        <span>Waiting for {{data.waitingLabelEmail}}...</span>
     </div>
 </div>

@@ -4,7 +4,8 @@ angular.module('keiin', ['keiin.filters', 'keiin.services', 'keiin.directives', 
 config(['ngClipProvider', '$routeProvider', '$locationProvider', function(ngClipProvider, $routeProvider,$locationProvider) {
 	$routeProvider
 	.when('/', {templateUrl: 'partials/main.html', controller: 'keiin.controllers.main'})
-	.when('/:username', {templateUrl: 'partials/user.html', controller: 'keiin.controllers.user'})
+	.when('/:email', {templateUrl: 'partials/user.html', controller: 'keiin.controllers.user'})
+	.when('/approve/:approveId', {templateUrl: 'partials/approve.html', controller: 'keiin.controllers.approve'})
 	.otherwise({redirectTo: '/'});
 	ngClipProvider.setPath("/lib/ZeroClipboard.swf");
 	$locationProvider.html5Mode(true);

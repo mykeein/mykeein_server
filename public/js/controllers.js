@@ -9,18 +9,18 @@ controllers.controller('keiin.controllers.app', ['$scope', function(scope) {
 
 controllers.controller('keiin.controllers.main', ['$scope', function(scope) {
     scope.data = {};
-    scope.data.inputUsername = "username";
+    scope.data.inputEmail = "email";
 }]);
 
 controllers.controller('keiin.controllers.user', ['$scope', '$routeParams', 'KeiinService', function(scope, routeParams, KeiinService) {
     scope.keyValue = ['00','01','02','03','04','05','06','07','08','09','0a','0b','0c','0d','0e','0f'];
     scope.data = {};
     scope.data.ansContent = '';
-    scope.data.waitingLabelUsername = routeParams.username;
+    scope.data.waitingLabelEmail = routeParams.email;
     scope.data.selections = ['decrypt', 'finishDecrypt', 'waiting', 'blocked', 'warned', 'notexist', 'notregistered'];
     scope.data.selection = scope.data.selections[2];
     scope.data.code = "code";
-    KeiinService.sendRequest(routeParams.username, function(ans) {
+    KeiinService.sendRequest(routeParams.email, function(ans) {
         scope.data.ans = ans;
         if(scope.data.ans.status=='success'){
             scope.data.selection = scope.data.selections[2];
@@ -88,4 +88,19 @@ controllers.controller('keiin.controllers.user', ['$scope', '$routeParams', 'Kei
         }
         return keyData;
     }
+}]);
+
+controllers.controller('keiin.controllers.approve', ['$scope', '$routeParams', 'KeiinService', function(scope, routeParams, KeiinService) {
+    scope.data = {};
+    scope.data.selections = ['inprogress', 'success', 'expired'];
+    scope.data.selection = scope.data.selections[0];
+    KeiinService.sendApprove(routeParams.approveId, function(ans) {
+        scope.data.ans = ans;
+        if(scope.data.ans.status=='success'){
+            scope.data.selection = scope.data.selections[1];
+        }
+        if(scope.data.ans.status=='expired'){
+            scope.data.selection = scope.data.selections[2];
+        }
+    });
 }]);

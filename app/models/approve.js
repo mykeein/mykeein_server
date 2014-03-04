@@ -2,12 +2,12 @@
  , Schema = mongoose.Schema
  , Types = mongoose.Types
 
- var UserSchema = new Schema({
+ var ApproveSchema = new Schema({
  	email:{type:String, required: true},
  	registerId:{type:String, required: true},
  	updated:{type:Date, required: true, default:Date.now},  
  })
 
- UserSchema.index({email:1,registerId:1},{unique:true})
+ ApproveSchema.index({email:1,registerId:1},{unique:false})
 
- mongoose.model('User', UserSchema)
+ mongoose.model('Approve', ApproveSchema)
