@@ -1,7 +1,7 @@
 <div class="animate-switch-container" ng-switch on="data.selection">
     <div class="animate-switch" ng-switch-when="decrypt">
-        <button class="list-new-app-b" ng-click="decrypt()">Decrypt</button>
-        <input class="main-search-input" type="text" ng-model="data.code" >
+        <button class="playlist-btn" ng-click="decrypt()">Decrypt</button>
+        <input class="footer-text" type="text" ng-model="data.code" >
     </div>
     <div class="animate-switch" ng-switch-when="blocked">
         <span>You have been blocked by {{data.waitingLabelEmail}}</span>
@@ -17,7 +17,7 @@
         <span>{{data.waitingLabelEmail}} not exist</span>
     </div>
     <div class="animate-switch" ng-switch-when="notregistered">
-        <span>{{data.waitingLabelEmail}} not approved yet.</span>
+        <span>{{data.waitingLabelEmail}} not registered yet</span>
     </div>
     <div class="animate-switch" ng-switch-default>
         <span>Waiting for {{data.waitingLabelEmail}}...</span>
