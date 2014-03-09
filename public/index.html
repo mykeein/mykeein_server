@@ -35,25 +35,29 @@
 </head>
 <body ng-controller="keiin.controllers.app">
 
-    <div class="nav box" id="nav">
-        <a href="/" class="nav-link">mykee.in</a>
-        
-        <div class="toggle-btn">
-            <label><input type="checkbox" checked id="video-toggle" /> Video Playing</label>
-        </div>
-    </div>
+    <div class="center-fix">
+        <div class="nav box" id="nav">
+            <a href="/" class="nav-link">mykee.in</a>
 
-    <div class="main">
-        <div class="box" ng-view></div>
-
-        <div class="box">
-            <p class="nav-link">
-                <strong>Application on</strong>
-                <a class="download" href="https://play.google.com/store/apps/details?id=in.mykee">Android Market</a>
-                <strong> and </strong>
-                <a class="download" href="/">iTunse</a>
-            </p>
+            <div class="toggle-btn">
+                <label><input type="checkbox" checked id="video-toggle" /> Video Playing</label>
+            </div>
         </div>
+
+        <div class="main">
+            <div class="box" ng-view></div>
+
+            <div>
+                <p class="nav-link">
+                    <strong>Application on</strong>
+                    <a class="download" href="https://play.google.com/store/apps/details?id=in.mykee">Android Market</a>
+                    <strong> and </strong>
+                    <a class="download" href="/">iTunse</a>
+                </p>
+            </div>
+        </div>
+
+
     </div>
     
     <script>

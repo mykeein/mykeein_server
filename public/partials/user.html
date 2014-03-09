@@ -1,25 +1,25 @@
-<div class="animate-switch-container" ng-switch on="data.selection">
-    <div class="animate-switch" ng-switch-when="decrypt">
-        <button class="playlist-btn" ng-click="decrypt()">Decrypt</button>
+<div ng-switch on="data.selection">
+    <div ng-switch-when="decrypt">
+        <button class="ans-btn" ng-click="decrypt()">Decrypt</button>
         <input class="footer-text" type="text" ng-model="data.code" >
     </div>
-    <div class="animate-switch" ng-switch-when="blocked">
+    <div class="wait-text" ng-switch-when="blocked">
         <span>You have been blocked by {{data.waitingLabelEmail}}</span>
     </div>
-    <div class="animate-switch" ng-switch-when="warned">
+    <div class="wait-text" ng-switch-when="warned">
         <span>Warning message from {{data.waitingLabelEmail}} , but still waiting...</span>
     </div>
-    <div class="animate-switch" ng-switch-when="finishDecrypt">
-        <button class="list-new-app-b" clip-copy="data.ansContent">Copy</button>
-        <span>{{data.ansContent}}</span>
+    <div ng-switch-when="finishDecrypt">
+        <button class="ans-btn" clip-copy="data.ansContent">Copy</button>
+        <span class="wait-text" >{{data.ansContent}}</span>
     </div>
-    <div class="animate-switch" ng-switch-when="notexist">
+    <div class="wait-text" ng-switch-when="notexist">
         <span>{{data.waitingLabelEmail}} not exist</span>
     </div>
-    <div class="animate-switch" ng-switch-when="notregistered">
+    <div class="wait-text" ng-switch-when="notregistered">
         <span>{{data.waitingLabelEmail}} not registered yet</span>
     </div>
-    <div class="animate-switch" ng-switch-default>
+    <div class="wait-text" ng-switch-default>
         <span>Waiting for {{data.waitingLabelEmail}}...</span>
     </div>
 </div>
