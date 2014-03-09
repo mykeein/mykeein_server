@@ -16,6 +16,14 @@ gcm.on('transmissionError', function(err) {
 	console.log("gcm on transmissionError - "+err);
 });
 
+var env = process.env.NODE_ENV;
+var apn = require('apn');
+var serviceIOS = new apn.connection({
+	key: '../../ssl/ios-cert/key.pem',
+	cert: '../../ssl/ios-cert/cert.pem',
+	gateway: env!=="production"?'gateway.sandbox.push.apple.com':'gateway.push.apple.com'
+});
+
 //(1 * 60 * 1000 = min)
 var cleanInterval = 10 * 60 * 1000; 
 var oldInterval = 10 * 60 * 1000;
@@ -63,13 +71,21 @@ exports.request = function(req, res, next){
 						if (err){
 							return next(err);
 						}
-						gcm.send({
-							registrationId: user.registerId,
-							collapseKey: 'data request',
-							delayWhileIdle: true,
-							timeToLive: 1800,
-							data: request
-						});
+						if(user.os==User.os.android){
+							gcm.send({
+								registrationId: user.registerId,
+								collapseKey: 'data request',
+								delayWhileIdle: true,
+								timeToLive: 1800,
+								data: request
+							});
+						}
+						if(user.os==User.os.ios){
+							var note = new apn.notification();
+							note.setAlertText(request);
+							note.setSound('alert.caf');
+							serviceIOS.pushNotification(note, user.registerId);
+						}
 						var ans4 = { status:'success',data:request };
 						return res.jsonp(ans4);
 					});
@@ -88,8 +104,8 @@ exports.request = function(req, res, next){
 					});
 				}
 			});
-		}
-	});
+}
+});
 };
 
 exports.loadMyRequests = function(req, res, next){

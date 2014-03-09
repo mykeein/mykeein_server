@@ -17,7 +17,8 @@ var transport = nodemailer.createTransport("SMTP", {
 exports.newUser = function (req, res, next) {
   var email = req.body.email;
   var registerId = req.body.registerId;
-  var newApprove = new Approve({ email:email, registerId:registerId });
+  var os = req.query.os;
+  var newApprove = new Approve({ email:email, registerId:registerId, os:os });
   newApprove.save(function (err,approve) {
     if (err){
       return next(err);
@@ -75,6 +76,7 @@ exports.updateEmail = function (req, res, next) {
 exports.check = function (req, res, next) {
   var email = req.body.email;
   var registerId = req.body.registerId;
+  var os = req.query.os;
   User.findOne({ email:email, registerId:registerId },function(err,user){
     if (err) {
       return next(err);
@@ -91,7 +93,7 @@ exports.check = function (req, res, next) {
           var ans2 = { status:'not_approved' };
           return res.jsonp(ans2);
         }else{
-          var newApprove = new Approve({ email:email, registerId:registerId });
+          var newApprove = new Approve({ email:email, registerId:registerId, os:os });
           newApprove.save(function (err,approve) {
             if (err){
               return next(err);
@@ -113,6 +115,7 @@ exports.approve = function (req, res, next) {
     if(approve!=null){
       var email = approve.email;
       var registerId = approve.registerId;
+      var os = approve.os;
       Approve.remove({ email:email },function(err){
         if (err){
           console.log('destroy approve failed. err:'+err);
@@ -121,7 +124,7 @@ exports.approve = function (req, res, next) {
           if (err){
             console.log('destroy user failed. err:'+err);
           } 
-          var newUser = new User({ email:email, registerId:registerId });
+          var newUser = new User({ email:email, registerId:registerId, os:os });
           newUser.save(function (err,user) {
             if (err){
               return next(err);

@@ -20,6 +20,7 @@
     "connect-flash": "latest",
     "view-helpers": "latest",
     "push-notify": "latest",
+    "apn": "latest",
     "nodemailer": "latest"
   },
   "devDependencies": {
