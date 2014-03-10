@@ -39,7 +39,7 @@ controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'M
 
     scope.waitTillResponse = function(requestId) {
         setTimeout(function(){
-            KeiinService.checkResponse(requestId, function(ans) {
+            MyKeeInService.checkResponse(requestId, function(ans) {
                 if(ans.status!='wait'){
                     scope.data.ans = ans;
                     if(scope.data.ans.data.requestData.dataType=='response'){
