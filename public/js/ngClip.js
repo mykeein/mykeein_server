@@ -41,6 +41,7 @@ directive('clipCopy', ['$window', 'ngClip', function ($window, ngClip) {
             if (angular.isDefined(attrs.clipClick)) {
               scope.$apply(scope.clipClick);
               setInterval(function() {
+                console.log("clipboard clean");
                 client.setText("");
               }, 15000);
             }
