@@ -16,13 +16,6 @@ var date = new Date(new Date().getTime()-oldInterval);
 
 function removeOldRequests(){
 	console.log();
-	fs.writeFile("./clean.log", "\nClean older than date:"+date.toString(), function(err) {
-		if(err) {
-			console.log(err);
-		} else {
-			console.log("Clean old done!");
-		}
-	}); 
 	mongoose.connect(config.db);
 	mongoose.connection.on('error',function(err){
 		throw err
@@ -32,6 +25,14 @@ function removeOldRequests(){
 		if (err) 
 			console.log('destroy request failed. err:'+err);
 		mongoose.connection.close();
+		
+		fs.writeFile("./clean.log", "\nClean older than date:"+date.toString(), function(err) {
+			if(err) {
+				console.log(err);
+			} else {
+				console.log("Clean old done!");
+			}
+		}); 
 	});
 }
 
