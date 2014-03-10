@@ -3,7 +3,7 @@
 /* Directives */
 
 
-var directives = angular.module('keiin.directives', []);
+var directives = angular.module('mykeein.directives', []);
 
 directives.directive('appVersion', ['version', function(version) {
 	return function(scope, elm, attrs) {

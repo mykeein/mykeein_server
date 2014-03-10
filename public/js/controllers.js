@@ -2,17 +2,17 @@
 
 /* Controllers */
 
-var controllers = angular.module('keiin.controllers', []);
+var controllers = angular.module('mykeein.controllers', []);
 
-controllers.controller('keiin.controllers.app', ['$scope', function(scope) {
+controllers.controller('mykeein.controllers.app', ['$scope', function(scope) {
 }]);
 
-controllers.controller('keiin.controllers.main', ['$scope', function(scope) {
+controllers.controller('mykeein.controllers.main', ['$scope', function(scope) {
     scope.data = {};
     scope.data.inputEmail = "email";
 }]);
 
-controllers.controller('keiin.controllers.user', ['$scope', '$routeParams', 'KeiinService', function(scope, routeParams, KeiinService) {
+controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'MyKeeInService', function(scope, routeParams, MyKeeInService) {
     scope.keyValue = ['00','01','02','03','04','05','06','07','08','09','0a','0b','0c','0d','0e','0f'];
     scope.data = {};
     scope.data.ansContent = '';
@@ -20,7 +20,7 @@ controllers.controller('keiin.controllers.user', ['$scope', '$routeParams', 'Kei
     scope.data.selections = ['decrypt', 'finishDecrypt', 'waiting', 'blocked', 'warned', 'notexist', 'notregistered'];
     scope.data.selection = scope.data.selections[2];
     scope.data.code = "code";
-    KeiinService.sendRequest(routeParams.email, function(ans) {
+    MyKeeInService.sendRequest(routeParams.email, function(ans) {
         scope.data.ans = ans;
         if(scope.data.ans.status=='success'){
             scope.data.selection = scope.data.selections[2];

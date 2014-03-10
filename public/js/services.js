@@ -2,7 +2,7 @@
 
 /* Services */
 
-var services = angular.module('keiin.services', ['ngResource']);
+var services = angular.module('mykeein.services', ['ngResource']);
 
 services.value('version', MConf.version);
 
@@ -10,7 +10,7 @@ services.value('domain', MConf.domain);
 
 services.value('name', MConf.name);
 
-services.factory('KeiinService', [ '$http', function(http) {
+services.factory('MyKeeInService', [ '$http', function(http) {
     var server = MConf.domain;
     return {
         sendRequest: function(email,cb) {

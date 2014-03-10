@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('keiin', ['keiin.filters', 'keiin.services', 'keiin.directives', 'keiin.controllers', 'ngClipboard']).
+angular.module('mykeein', ['mykeein.filters', 'mykeein.services', 'mykeein.directives', 'mykeein.controllers', 'ngClipboard']).
 config(['ngClipProvider', '$routeProvider', '$locationProvider', function(ngClipProvider, $routeProvider,$locationProvider) {
 	$routeProvider
-	.when('/', {templateUrl: 'partials/main.html', controller: 'keiin.controllers.main'})
-	.when('/:email', {templateUrl: 'partials/user.html', controller: 'keiin.controllers.user'})
+	.when('/', {templateUrl: 'partials/main.html', controller: 'mykeein.controllers.main'})
+	.when('/:email', {templateUrl: 'partials/user.html', controller: 'mykeein.controllers.user'})
 	.otherwise({redirectTo: '/'});
 	ngClipProvider.setPath("/lib/ZeroClipboard.swf");
 	$locationProvider.html5Mode(true);
