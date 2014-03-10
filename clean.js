@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
+, fs = require('fs');
 var models_path = __dirname + '/app/models';
 console.log('models_path:'+models_path);
 fs.readdirSync(models_path).forEach(function (file) {
