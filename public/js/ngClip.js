@@ -37,14 +37,14 @@ directive('clipCopy', ['$window', 'ngClip', function ($window, ngClip) {
         var clip = new ZeroClipboard(element);
         clip.on( 'load', function(client) {
           var onMousedown = function (client) {
-            console.log("clipboard click[scope.clipCopy:"+scope.clipCopy+", attrs.clipClick"+attrs.clipClick+", scope.clipClick"+scope.clipClick);
+            console.log("clipboard click");
             client.setText(scope.$eval(scope.clipCopy));
             if (angular.isDefined(attrs.clipClick)) {
               scope.$apply(scope.clipClick);
             }
             setTimeout(function() { 
               console.log("clipboard clean");
-              window.clipboardData.setData('text','');
+              client.setText('');
             }, 15000);
           };
           client.on('mousedown', onMousedown);
