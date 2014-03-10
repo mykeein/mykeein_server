@@ -25,8 +25,8 @@ var serviceIOS = new apn.connection({
 });
 
 //(1 * 60 * 1000 = min)
-var cleanInterval = 1 * 60 * 1000; 
-var oldInterval = 1 * 60 * 1000;
+var cleanInterval = 10 * 60 * 1000; 
+var oldInterval = 10 * 60 * 1000;
 
 function cleanJob(){
 	setInterval(function() {
