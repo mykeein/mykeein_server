@@ -25,12 +25,12 @@ function removeOldRequests(){
 		if (err) 
 			console.log('destroy request failed. err:'+err);
 		mongoose.connection.close();
-		
-		fs.writeFile("./clean.log", "\nClean older than date:"+date.toString(), function(err) {
+
+		fs.writeFile("./clean.log", "Clean older than date:"+date.toString()+"\n", function(err) {
 			if(err) {
 				console.log(err);
 			} else {
-				console.log("Clean old done!");
+				console.log("Clean old done!\n");
 			}
 		}); 
 	});
