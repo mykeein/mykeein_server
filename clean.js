@@ -6,6 +6,9 @@ fs.readdirSync(models_path).forEach(function (file) {
 	require(models_path+'/'+file);
 });
 
+var env = process.env.NODE_ENV || 'development'
+, config = require('./config/config')[env];
+
 //(1 * 60 * 1000 = 1min)
 var oldInterval = 10 * 60 * 1000;
 
