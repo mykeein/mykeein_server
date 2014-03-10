@@ -1,12 +1,11 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 var models_path = __dirname + '/app/models';
 console.log('models_path:'+models_path);
 fs.readdirSync(models_path).forEach(function (file) {
 	require(models_path+'/'+file);
 });
 
-//(1 * 60 * 1000 = min)
-var cleanInterval = 10 * 60 * 1000; 
+//(1 * 60 * 1000 = 1min)
 var oldInterval = 10 * 60 * 1000;
 
 var nowTime = new Date().getTime();
