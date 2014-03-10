@@ -24,6 +24,28 @@ var serviceIOS = new apn.connection({
 	gateway: env!=="production"?'gateway.sandbox.push.apple.com':'gateway.push.apple.com'
 });
 
+//(1 * 60 * 1000 = min)
+var cleanInterval = 1 * 60 * 1000; 
+var oldInterval = 1 * 60 * 1000;
+
+function cleanJob(){
+	setInterval(function() {
+		removeOldRequests();
+	}, cleanInterval);
+}
+
+function removeOldRequests(){
+	var date = new Date(new Date().getTime()-oldInterval);
+	console.log("Clean reaquests date:"+date.toString());
+	Request.remove({ updated:{ $lt:date } },
+		function(err){
+			if (err) 
+				console.log('destroy request failed. err:'+err);
+		});
+}
+
+cleanJob();
+
 exports.request = function(req, res, next){
 	var ip = req.connection.remoteAddress;
 	var email = req.params.email;
