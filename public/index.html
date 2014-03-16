@@ -2,7 +2,22 @@
 <html lang="en" ng-app="mykeein">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+	<meta name="title" content="MyKeeIn">
+	<meta name="description" content="An easy passwords holder -secure and simple -receive your passwords from any place -no install needs -one app one place with your passwords">
+	<link rel="shortlink" href="https://mykee.in">
+	<link rel="icon" href="https://s3.amazonaws.com/mykee.in/ic.png" sizes="512x512">
+
+	<meta property="og:title" content="MyKeeIn">
+	<meta property="og:description" content="An easy passwords holder -secure and simple -receive your passwords from any place -no install needs -one app one place with your passwords">
+	<meta property="og:image" content="https://s3.amazonaws.com/mykee.in/ic.png">
+	<meta property="og:url" content="https://mykee.in">
+
+	<meta name="twitter:url" content="https://mykee.in">
+	<meta name="twitter:title" content="MyKeeIn">
+	<meta name="twitter:description" content="An easy passwords holder -secure and simple -receive your passwords from any place -no install needs -one app one place with your passwords">
+	<meta name="twitter:image" content="https://s3.amazonaws.com/mykee.in/ic.png">
+
 	<title app-name>mykee.in</title>
 	<link rel="stylesheet" href="css/bootstrap-datepicker.css"/>
 	<link rel="stylesheet" href="css/video-js.css"/>
@@ -19,6 +34,7 @@
 	<script src="lib/cryptojs/pad-nopadding-min.js"></script>
 	<script src="lib/video.js"></script>
 	<script src="lib/bigvideo.js"></script>
+	<script src="lib/modernizr-2.5.3.min.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:900&text=ABCDEFGHIJKLMNOPQRSTUVWXYZ' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/style.css">
 	<!-- from http://dfcb.github.io/BigVideo.js/  -->
@@ -64,12 +80,15 @@
             // initialize BigVideo
             BV = new $.BigVideo();
             BV.init();
-            BV.show('https://s3.amazonaws.com/mykee.in/bg.mov',{ambient:true});
-            // Video Play/Pause toggle
-            $('#video-toggle').on('click', function(e) {
-            	if (this.checked)   BV.getPlayer().play();
-            	else                BV.getPlayer().pause();
-            })
+            if (Modernizr.touch) {
+            	BV.show('https://s3.amazonaws.com/mykee.in/bg.jpg');
+            } else {
+            	BV.show('https://s3.amazonaws.com/mykee.in/bg.mov',{ambient:true});
+            	$('#video-toggle').on('click', function(e) {
+            		if (this.checked)   BV.getPlayer().play();
+            		else                BV.getPlayer().pause();
+            	})
+            }
         });
 	</script>
 	<script type="text/javascript">

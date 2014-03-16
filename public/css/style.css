@@ -1,6 +1,7 @@
 * { -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; *behavior:url(boxsizing.htc); }
 html, body { 
-	margin:0;
+	height: 100%;
+	margin: 0;
 	padding:0;background:#000;
 	line-height:1;
 	font-family:Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -25,6 +26,7 @@ pre {
 	white-space:-o-pre-wrap;    /* Opera 7 */
 	word-wrap:break-word;       /* Internet Explorer 5.5+ */
 }
+
 .box { 
 	background:#444; background:rgba(0,0,0,.6);
 	padding:20px;
@@ -140,5 +142,5 @@ pre {
 .center-fix {
 	margin-left: auto;
 	margin-right: auto;
-	width: 50em
+	width: 50em;
 }

@@ -18,6 +18,7 @@
     },
     level: 9
   }))
+  app.use(express.favicon(__dirname + '/../public/img/favicon.ico'));
   app.use(express.favicon())
   app.use(express.static(config.root + '/public'))
 
