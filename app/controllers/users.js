@@ -149,9 +149,9 @@ function sendEmailApprove(email,approveId,res){
     domain = config.domain;
   }
   var sendData = "Approve your account by this " 
-  +"<a href=\""+domain+"/approve/"+approveId+"\">Link</a>"
+  +"<a href=\""+domain+"/approve/"+approveId+"\">   Link   </a>"
   +" or from browser by " 
-  +"address:\""+domain+"/approve/"+approveId+"\""
+  +"address:   \""+domain+"/approve/"+approveId+"\"   "
   +" Not a mykee.in user ?  Ignore this mail."
   +" Thank you from mykee.in";
   var mailOptions = {

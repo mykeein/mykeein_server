@@ -66,7 +66,7 @@ controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'M
         var message = scope.data.ans.data.requestData.content;
         var decrypted = CryptoJS.AES.decrypt(message, key, { iv: iv, padding: CryptoJS.pad.NoPadding, mode: CryptoJS.mode.CBC});
         var decryptedStr = decrypted.toString(CryptoJS.enc.Utf8);
-        scope.data.ansContent = decryptedStr.replace(" ","");
+        scope.data.ansContent = decryptedStr.replace(/\s/g, '');
         scope.data.selection = scope.data.selections[1];
     };
     
