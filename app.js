@@ -39,7 +39,7 @@ if(config.ssl){
 	var options = {
 		key: fs.readFileSync('./ssl/server.key'),
 		cert: fs.readFileSync('./ssl/27e952219855a0.crt'),
-		ca: [fs.readFileSync('./ssl/mykeein.pem')]
+		ca: [fs.readFileSync('./ssl/gd_bundle-g2-g1.pem')]
 	};
 	https.createServer(options, app).listen(config.sslport);
 	http.createServer(function(req, res){
