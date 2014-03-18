@@ -13,4 +13,7 @@ module.exports = function (app) {
 	app.post('/api/requests/check', requests.responseCheck);
 	app.post('/api/requests/:email', requests.request);
 	app.get('/approve/:approveId', user.approve);
+	app.get('/:email',function(req, res) {
+		res.redirect('/#!/'+req.params.email);
+	});
 };
