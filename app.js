@@ -37,18 +37,19 @@ var domain = config.domain || 'http://localhost:3000';
 if(config.ssl){
 	console.log('ssl is on');
 	var options = {
-  		key: fs.readFileSync('./ssl/server.key'),
-  		cert: fs.readFileSync('./ssl/27e952219855a0.crt')
+		key: fs.readFileSync('./ssl/server.key'),
+		cert: fs.readFileSync('./ssl/27e952219855a0.crt'),
+		ca: [fs.readFileSync('./ssl/mykeein.pem')]
 	};
 	https.createServer(options, app).listen(config.sslport);
 	http.createServer(function(req, res){
-	   	res.writeHead(301, {
-	       'Content-Type': 'text/plain', 
-	       'Location':'https://'+req.headers.host+req.url
-	   	});
-	    res.end('Redirecting to SSL\n');
+		res.writeHead(301, {
+			'Content-Type': 'text/plain', 
+			'Location':'https://'+req.headers.host+req.url
+		});
+		res.end('Redirecting to SSL\n');
 	}).listen(port);
-    console.log('SSL MyKeeIn server started on domain:'+config.ssldomain+' , port:'+config.sslport);
+	console.log('SSL MyKeeIn server started on domain:'+config.ssldomain+' , port:'+config.sslport);
 }else{
 	app.listen(port);
 	console.log('MyKeeIn server started on domain:'+domain+' , port:'+port);
