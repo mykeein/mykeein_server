@@ -1,7 +1,7 @@
 <div ng-switch on="data.selection">
     <div ng-switch-when="decrypt">
-        <button class="ans-btn" ng-click="decrypt()">Decrypt</button>
         <input class="footer-text" type="text" ng-model="data.code" >
+        <button class="ans-btn" ng-click="decrypt()">Decrypt</button>
     </div>
     <div class="wait-text" ng-switch-when="blocked">
         <span>You have been blocked by {{data.waitingLabelEmail}}</span>
@@ -10,8 +10,8 @@
         <span>Warning message from {{data.waitingLabelEmail}} , but still waiting...</span>
     </div>
     <div ng-switch-when="finishDecrypt">
-        <button class="ans-btn" clip-copy="data.ansContent">Copy</button>
         <span class="wait-text" >{{data.ansContent}}</span>
+        <button class="ans-btn" clip-copy="data.ansContent">Copy</button>
     </div>
     <div class="wait-text" ng-switch-when="notexist">
         <span>{{data.waitingLabelEmail}} not exist</span>
