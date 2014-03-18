@@ -38,7 +38,7 @@ if(config.ssl){
 	console.log('ssl is on');
 	var options = {
   		key: fs.readFileSync('./ssl/server.key'),
-  		cert: fs.readFileSync('./ssl/27e952219855a0.crt')
+  		cert: fs.readFileSync('./ssl/gd_bundle-g2-g1.crt')
 	};
 	https.createServer(options, app).listen(config.sslport);
 	http.createServer(function(req, res){
