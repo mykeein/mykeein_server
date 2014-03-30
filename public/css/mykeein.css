@@ -1,0 +1,125 @@
+html, body { 
+	background-image:url('https://s3.amazonaws.com/mykee.in/bg.jpg');
+	background-position:center; 
+	background-color:#02630D;
+}
+.all-in-middle{
+	margin-left: auto;
+	margin-right: auto;
+	width: 720px;
+}
+.home-bg{
+	position: absolute;
+	padding: 15px;
+	margin-left: 10px;
+	margin-top: 30px;
+	border:2px solid;
+	border-color:rgba(255,255,255,.3);
+	border-radius: 1px;
+	background-image:url('https://s3.amazonaws.com/mykee.in/bg.jpg');
+	background-position:center;
+}
+.content-bg{
+	position: absolute;
+	padding: 50px;
+	margin-top: 90px;
+	width: 640px;
+	min-height: 350px;
+	border:3px solid;
+	border-color:rgba(255,255,255,.3);
+	border-radius: 2px;
+	background-image:url('https://s3.amazonaws.com/mykee.in/bg.jpg');
+	background-position:center;
+}
+.applications-bg{
+	position: absolute;
+	margin-left: 300px;
+	margin-top: 45px;
+	width: 380px;
+	padding: 0px;
+	padding-right: 10px;
+	padding-left: 20px;
+	border:2px solid;
+	border-color:rgba(255,255,255,.3);
+	border-radius: 1px;
+	background-image:url('https://s3.amazonaws.com/mykee.in/bg.jpg');
+	background-position:center;
+}
+.certified-bg{
+	position: absolute;
+	margin-top: 550px;
+	border:3px solid;
+	border-color:rgba(0,0,0,.3);
+	border-radius: 2px;
+	background-image:url('https://s3.amazonaws.com/mykee.in/bg.jpg');
+	background-position:center;
+}
+.applications-text{	
+	font-family:'Source Sans Pro', sans-serif; font-weight:900;
+	color:#ddd; 
+	text-shadow: 1px 1px 1px #111;
+	font-size:15px;
+
+}
+.applications-link{
+	font-family:'Source Sans Pro', sans-serif; font-weight:900; 
+	text-transform:uppercase;
+	color:#fff; 
+	text-shadow: 1px 1px 1px #111;
+	font-size:17px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.home{
+	font-family:'Source Sans Pro', sans-serif; font-weight:900; 
+	text-transform:uppercase;
+	color:#fff; 
+	text-shadow: 3px 3px 3px #333;
+	font-size:23px;
+	text-decoration:none;
+}
+
+.in{
+	font-family:'Source Sans Pro', sans-serif; font-weight:900; 
+	color:#444;
+	width: 250px;
+	background-color:rgba(255,255,255,.5);
+	text-shadow: 1px 1px 1px #ddd;
+	font-size:17px;
+	padding: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 3px;
+}
+.btn{
+	font-family:'Source Sans Pro', sans-serif; font-weight:900;
+	color:#fff; 
+	text-transform:uppercase;
+	text-decoration:none;
+	border:2px solid;
+	background-color:rgba(0,0,0,.3);
+	border-color:rgba(255,255,255,.5);
+	border-radius: 3px;
+	padding: 5px;
+}
+.text{	
+	font-family:'Source Sans Pro', sans-serif; font-weight:900;
+	color:#eee; 
+	text-shadow: 1px 1px 1px #333;
+	font-size:15px;
+
+}
+.text-warn{	
+	font-family:'Source Sans Pro', sans-serif; font-weight:900;
+	color:#F7B00A; 
+	text-shadow: 1px 1px 1px #333;
+	font-size:15px;
+
+}
+.text-block{	
+	font-family:'Source Sans Pro', sans-serif; font-weight:900;
+	color:#FF0000; 
+	text-shadow: 1px 1px 1px #333;
+	font-size:15px;
+
+}

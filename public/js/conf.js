@@ -6,6 +6,6 @@
 
 var MConf = {
 	domain: 'https://mykee.in',
-	version: '0.1',
+	version: '0.2',
 	name: 'mykee.in'
 };
