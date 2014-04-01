@@ -59,33 +59,16 @@ controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'M
     };
 
     scope.decrypt = function() {
+        //https://github.com/mpetersen/aes-example
+        var iv = "F27D5C9927726BCEFE7510B1BDD3D137";
+        var salt = "3FF2EC019C627B945225DEBAD71A01B6985FE84C95A70EB132882F88C0A59A55";
+        var keySize = 128;
+        var iterationCount = 1000;
         var passPhrase = scope.data.code;
-        var passPhraseFinish = scope.getBytes(passPhrase);
-        var key = CryptoJS.enc.Hex.parse(passPhraseFinish);
-        var iv  = CryptoJS.enc.Hex.parse('0f0e0d0c0b0a09080706050403020100');
-        var message = scope.data.ans.data.requestData.content;
-        var decrypted = CryptoJS.AES.decrypt(message, key, { iv: iv, padding: CryptoJS.pad.NoPadding, mode: CryptoJS.mode.CBC});
-        var decryptedStr = decrypted.toString(CryptoJS.enc.Utf8);
-        scope.data.ansContent = decryptedStr.replace(/\s/g, '');
+        var cipherText = scope.data.ans.data.requestData.content;
+        var aesUtil = new AesUtil(keySize, iterationCount)
+        var decrypt = aesUtil.decrypt(salt, iv, passPhrase, cipherText);
+        scope.data.ansContent = decrypt;
         scope.data.selection = scope.data.selections[1];
     };
-    
-    scope.getBytes = function(key) {
-        var index = 0;
-        var keyData = '';
-        var l = 0;
-        var chStr = '00';
-        for (var i = 0; i < key.length; i++) {
-            index = parseInt(key.charAt(i));
-            chStr = scope.keyValue[index];
-            keyData += chStr;
-            l = i;
-        }
-        var need = 16 - l;
-        for (var i = 1; i < need; i++) {
-            chStr = scope.keyValue[0];
-            keyData += chStr;
-        }
-        return keyData;
-    }
 }]);
