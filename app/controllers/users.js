@@ -27,10 +27,11 @@ exports.newUser = function (req, res, next) {
   });
 };
 
-exports.updateRegisterId = function (req, res, next) {
+exports.updateEmail = function (req, res, next) {
   var newEmail = req.body.newEmail;
   var oldEmail = req.body.oldEmail;
   var registerId = req.body.registerId;
+  var os = req.query.os;
   User.findOne({ email:oldEmail , registerId:registerId },function(err,user){
     if (err) {
       return next(err);
@@ -45,15 +46,22 @@ exports.updateRegisterId = function (req, res, next) {
         return res.jsonp(ans);
       });
     }else{
-      return next(new Error("not exists user{email:"+oldEmail+"}, {registerId:"+registerId+"}"));
+      var newApprove = new Approve({ email:newEmail, registerId:registerId, os:os });
+      newApprove.save(function (err,approve) {
+        if (err){
+          return next(err);
+        }
+        sendEmailApprove(email,approve._id,res);
+      });
     }
   });
 };
 
-exports.updateEmail = function (req, res, next) {
+exports.updateRegisterId = function (req, res, next) {
   var email = req.body.email;
   var newRegisterId = req.body.newRegisterId;
   var oldRegisterId = req.body.oldRegisterId;
+  var os = req.query.os;
   User.findOne({ email:email , registerId:oldRegisterId },function(err,user){
     if (err) {
       return next(err);
@@ -68,7 +76,13 @@ exports.updateEmail = function (req, res, next) {
         return res.jsonp(ans);
       });
     }else{
-      return next(new Error("not exists user{email:"+email+"}, {registerId:"+oldRegisterId+"}"));
+      var newApprove = new Approve({ email:email, registerId:newRegisterId, os:os });
+      newApprove.save(function (err,approve) {
+        if (err){
+          return next(err);
+        }
+        sendEmailApprove(email,approve._id,res);
+      });
     }
   });
 };
