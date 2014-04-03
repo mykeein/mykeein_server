@@ -7,9 +7,13 @@ var controllers = angular.module('mykeein.controllers', []);
 controllers.controller('mykeein.controllers.app', ['$scope', function(scope) {
 }]);
 
-controllers.controller('mykeein.controllers.main', ['$scope', function(scope) {
+controllers.controller('mykeein.controllers.main', ['$scope', '$location', function(scope, location) {
     scope.data = {};
     scope.data.inputEmail = "email";
+
+    scope.sendRequest = function() {
+        location.path("/"+scope.data.inputEmail);
+    };
 }]);
 
 controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'MyKeeInService', function(scope, routeParams, MyKeeInService) {

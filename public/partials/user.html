@@ -1,6 +1,6 @@
 <div ng-switch on="data.selection">
     <div ng-switch-when="decrypt">
-        <input class="in" type="text" ng-model="data.code" >
+        <input class="in" type="text" select-all ng-enter="decrypt()" ng-model="data.code" >
         <button class="btn" ng-click="decrypt()">Decrypt</button>
     </div>
     <div class="text-block" ng-switch-when="blocked">
@@ -12,6 +12,7 @@
     <div ng-switch-when="finishDecrypt">
         <span class="text" >{{data.ansContent}}</span>
         <button class="btn" clip-copy="data.ansContent">Copy</button>
+        <button class="btn" clip-clear>Clear clipboard</button>
     </div>
     <div class="text" ng-switch-when="notexist">
         <span>{{data.waitingLabelEmail}} not exist</span>

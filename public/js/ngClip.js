@@ -36,16 +36,40 @@ directive('clipCopy', ['$window', 'ngClip', function ($window, ngClip) {
         // Create the clip object
         var clip = new ZeroClipboard(element);
         clip.on( 'load', function(client) {
-          var onMousedown = function (client) {
+          var onMousedown = function (event) {
             console.log("clipboard click");
-            client.setText(scope.$eval(scope.clipCopy));
+            event.setText(scope.$eval(scope.clipCopy));
+            if (angular.isDefined(attrs.clipClick)) {
+              scope.$apply(scope.clipClick);
+            }// setTimeout(function() { console.log("clipboard clean"); event.setText('timeout'); }, 15000);
+          };
+          client.on('mousedown', onMousedown);
+
+          scope.$on('$destroy', function() {
+            client.off('mousedown', onMousedown);
+            client.unclip(element);
+          });
+        });
+      }
+    };
+  }]).
+directive('clipClear', ['$window', 'ngClip', function ($window, ngClip) {
+  return {
+    scope: {
+      clipClear: '&',
+      clipClick: '&'
+    },
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+        // Create the clip object
+        var clip = new ZeroClipboard(element);
+        clip.on( 'load', function(client) {
+          var onMousedown = function (event) {
+            console.log("clipboard clear");
+            event.setText("");
             if (angular.isDefined(attrs.clipClick)) {
               scope.$apply(scope.clipClick);
             }
-            setTimeout(function() { 
-              console.log("clipboard clean");
-              client.setText('');
-            }, 15000);
           };
           client.on('mousedown', onMousedown);
 
