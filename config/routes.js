@@ -9,6 +9,7 @@ module.exports = function (app) {
 	app.post('/api/requests/load', requests.loadMyRequests);
 	app.post('/api/requests/block', requests.blockIp);
 	app.post('/api/requests/warn', requests.warnIp);
+	app.post('/api/requests/warnall', requests.warnAllIp);
 	app.post('/api/requests/send', requests.sendToIp);
 	app.post('/api/requests/check', requests.responseCheck);
 	app.post('/api/requests/:email', requests.request);

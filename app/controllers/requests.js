@@ -24,23 +24,35 @@ var serviceIOS = new apn.connection({
 	gateway: env!=="production"?'gateway.sandbox.push.apple.com':'gateway.push.apple.com'
 });
 
-//(1 * 60 * 1000 = min)
+//(60 * 1000 = min)
 var cleanInterval = 10 * 60 * 1000; 
-var oldInterval = 10 * 60 * 1000;
+var oldRequestInterval = 10 * 60 * 1000;
+var oldApproveInterval = 24 * 60 * 60 * 1000;
 
 function cleanJob(){
 	setInterval(function() {
-		removeOldRequests();
+		removeOld();
 	}, cleanInterval);
 }
 
-function removeOldRequests(){
-	var date = new Date(new Date().getTime()-oldInterval);
-	console.log("Clean reaquests date:"+date.toString());
-	Request.remove({ updated:{ $lt:date } },
+function removeOld(){
+	var dateRequest = new Date(new Date().getTime()-oldRequestInterval);
+	Request.remove({ updated:{ $lt:dateRequest } },
 		function(err){
-			if (err) 
+			if (err){ 
 				console.log('destroy request failed. err:'+err);
+			}else{
+				console.log("Clean reaquests date:"+dateRequest.toString());
+			}
+		});
+	var dateApprove = new Date(new Date().getTime()-oldApproveInterval);
+	Approve.remove({ updated:{ $lt:dateApprove } },
+		function(err){
+			if (err){ 
+				console.log('destroy approve failed. err:'+err);
+			}else{
+				console.log("Clean approve date:"+dateApprove.toString());
+			}
 		});
 }
 
@@ -50,17 +62,15 @@ exports.request = function(req, res, next){
 	var ip = req.connection.remoteAddress;
 	var email = req.params.email;
 	Request.find({ ip:ip, email:email, "requestData.dataType":Request.dataType.block },function(err,requests){
-		if (err) {
+		if (err)
 			return next(err);
-		}
 		if(requests!=null && requests.length>0){	
 			var ans1 = { status:'block', data:requests[0] };
 			return res.jsonp(ans1);
 		}else{
 			User.findOne({ email:email },function(err,user){
-				if (err) {
+				if (err)
 					return next(err);
-				}
 				if(user!=null){
 					var request = new Request({
 						ip:ip,
@@ -68,9 +78,8 @@ exports.request = function(req, res, next){
 						requestData:{ dataType:Request.dataType.open }
 					});
 					request.save(function (err,request) {
-						if (err){
+						if (err)
 							return next(err);
-						}
 						if(user.os==User.os.android){
 							gcm.send({
 								registrationId: user.registerId,
@@ -91,9 +100,8 @@ exports.request = function(req, res, next){
 					});
 				}else{
 					Approve.findOne({ email:email },function(err,approve){
-						if (err) {
+						if (err)
 							return next(err);
-						}
 						if(approve!=null){
 							var ans2 = { status:'notregistered' };
 							return res.jsonp(ans2);
@@ -110,11 +118,9 @@ exports.request = function(req, res, next){
 
 exports.loadMyRequests = function(req, res, next){
 	var email = req.body.email;
-	Request.find({ email:email,
-		$or: [ 
-		{ "requestData.dataType":Request.dataType.open }, 
-		{ "requestData.dataType":Request.dataType.warn } 
-		] 
+	Request.find({
+		email:email ,
+		"requestData.dataType":Request.dataType.open 
 	},function(err,requests){
 		if (err) {
 			return next(err);
@@ -126,7 +132,7 @@ exports.loadMyRequests = function(req, res, next){
 exports.blockIp = function(req, res, next){
 	var email = req.body.email;
 	var registerId = req.body.registerId;
-	var requestId = req.body.requestId;
+	var ip = req.body.ip;
 	User.findOne({ email:email , registerId:registerId },function(err,user){
 		if (err) {
 			return next(err);
@@ -134,22 +140,18 @@ exports.blockIp = function(req, res, next){
 		if(user==null){
 			return next(new Error("not exists user{email:"+email+" , registerId:"+registerId+" }"));
 		} 
-		Request.findOne({ _id:requestId },function(err,request){
+		var nowDate = new Date();
+		Request.update({ ip:ip, email:email, responded:false },{ 
+			updated:nowDate, 
+			responded:true, 
+			"requestData.dataType":Request.dataType.block 
+		},{multi: true},function(err,numAffected){
 			if (err) {
+				console.log('block update request with ip:'+ip+' failed. err:'+err);
 				return next(err);
 			}
-			if (request==null) {
-				return next(err);
-			}
-			request.updated = new Date();
-			request.responded = true;
-			request.requestData.dataType = Request.dataType.block;
-			request.save(function(err,request){
-				if (err) {
-					return next(err);
-				}
-				return res.jsonp({ status:'success' });
-			});
+			console.log('block update request with ip:'+ip+' count:'+numAffected);
+			return res.jsonp({ status:'success' });
 		});
 	});
 };
@@ -181,6 +183,33 @@ exports.warnIp = function(req, res, next){
 				}
 				return res.jsonp({ status:'success' });
 			});
+		});
+	});
+};
+
+exports.warnAllIp = function(req, res, next){	
+	var email = req.body.email;
+	var registerId = req.body.registerId;
+	var ip = req.body.ip;
+	User.findOne({ email:email , registerId:registerId },function(err,user){
+		if (err) {
+			return next(err);
+		}
+		if(user==null){
+			return next(new Error("not exists user{email:"+email+" , registerId:"+registerId+" }"));
+		} 
+		var nowDate = new Date();
+		Request.update({ ip:ip, email:email, responded:false },{ 
+			updated:nowDate, 
+			responded:true, 
+			"requestData.dataType":Request.dataType.warn 
+		},{multi: true},function(err,numAffected){
+			if (err) {
+				console.log('warn update request with ip:'+ip+' failed. err:'+err);
+				return next(err);
+			}
+			console.log('warn update request with ip:'+ip+' count:'+numAffected);
+			return res.jsonp({ status:'success' });
 		});
 	});
 };

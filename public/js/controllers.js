@@ -52,14 +52,13 @@ controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'M
                         scope.data.selection = scope.data.selections[3];
                     }else if(scope.data.ans.data.requestData.dataType=='warn'){
                         scope.data.selection = scope.data.selections[4];
-                        scope.waitTillResponse(requestId);
                     }else{
                         scope.waitTillResponse(requestId);
                     }
                 }else{
                     scope.waitTillResponse(requestId);
                 }
-            })},5000);
+            })},3000);
     };
 
     scope.decrypt = function() {

@@ -23,7 +23,7 @@ exports.newUser = function (req, res, next) {
     if (err){
       return next(err);
     }
-    sendEmailApprove(email,approve._id,res);
+    sendEmailApprove(approve.email,approve._id,res);
   });
 };
 
@@ -32,42 +32,41 @@ exports.updateEmail = function (req, res, next) {
   var oldEmail = req.body.oldEmail;
   var registerId = req.body.registerId;
   var os = req.query.os;
-  User.findOne({ email:oldEmail , registerId:registerId },function(err,user){
-    if (err) {
-      return next(err);
-    }
-    if(user!=null){
-      user.email = newEmail;
-      user.save(function (err,user) {
-        if (err){
-          return next(err);
-        }
-        var ans = { status:'success',data:user };
-        return res.jsonp(ans);
-      });
-    }else{
+  // User.findOne({ email:oldEmail , registerId:registerId },function(err,user){
+  //   if (err) {
+  //     return next(err);
+  //   }
+    // if(user!=null){
+    //   user.email = newEmail;
+    //   user.save(function (err,user) {
+    //     if (err){
+    //       return next(err);
+    //     }
+    //     var ans = { status:'success',data:user };
+    //     return res.jsonp(ans);
+    //   });
+    // }else{
       var newApprove = new Approve({ email:newEmail, registerId:registerId, os:os });
       newApprove.save(function (err,approve) {
         if (err){
           return next(err);
         }
-        sendEmailApprove(email,approve._id,res);
+        sendEmailApprove(approve.email,approve._id,res);
       });
-    }
-  });
+    // }
+  // });
 };
 
 exports.updateRegisterId = function (req, res, next) {
   var email = req.body.email;
-  var newRegisterId = req.body.newRegisterId;
-  var oldRegisterId = req.body.oldRegisterId;
+  var registerId = req.body.registerId;
   var os = req.query.os;
-  User.findOne({ email:email , registerId:oldRegisterId },function(err,user){
+  User.findOne({ email:email },function(err,user){
     if (err) {
       return next(err);
     }
     if(user!=null){
-      user.registerId = newRegisterId;
+      user.registerId = registerId;
       user.save(function (err,user) {
         if (err){
           return next(err);
@@ -76,12 +75,12 @@ exports.updateRegisterId = function (req, res, next) {
         return res.jsonp(ans);
       });
     }else{
-      var newApprove = new Approve({ email:email, registerId:newRegisterId, os:os });
+      var newApprove = new Approve({ email:email, registerId:registerId, os:os });
       newApprove.save(function (err,approve) {
         if (err){
           return next(err);
         }
-        sendEmailApprove(email,approve._id,res);
+        sendEmailApprove(approve.email,approve._id,res);
       });
     }
   });
@@ -122,37 +121,42 @@ exports.check = function (req, res, next) {
 
 exports.approve = function (req, res, next) {
   var approveId = req.params.approveId;
-  Approve.findOne({ _id:approveId },function (err,approve) {
-    if (err){
-      return next(err);
-    }
-    if(approve!=null){
-      var email = approve.email;
-      var registerId = approve.registerId;
-      var os = approve.os;
-      Approve.remove({ email:email },function(err){
-        if (err){
-          console.log('destroy approve failed. err:'+err);
-        } 
-        User.remove({ email:email },function(err){
+  if(approveId == null || approveId.length != 24){
+    res.status(200).render('approve.html', { state: 'expired. resend approve from mykee.in app again.' });
+    return;
+  }else{
+    Approve.findOne({ _id:approveId },function (err,approve) {
+      if (err){
+        return next(err);
+      }
+      if(approve!=null){
+        var email = approve.email;
+        var registerId = approve.registerId;
+        var os = approve.os;
+        Approve.remove({ email:email },function(err){
           if (err){
-            console.log('destroy user failed. err:'+err);
+            console.log('destroy approve failed. err:'+err);
           } 
-          var newUser = new User({ email:email, registerId:registerId, os:os });
-          newUser.save(function (err,user) {
+          User.remove({ $or:[{ email:email }, { registerId:registerId }] },function(err){
             if (err){
-              return next(err);
-            }
-            res.status(200).render('approve.html', { state: 'success ! Thank you using mykee.in' })
-            return;
+              console.log('destroy user failed. err:'+err);
+            } 
+            var newUser = new User({ email:email, registerId:registerId, os:os });
+            newUser.save(function (err,user) {
+              if (err){
+                return next(err);
+              }
+              res.status(200).render('approve.html', { state: 'success ! Thank you using mykee.in' })
+              return;
+            });
           });
         });
-      });
-    }else{
-      res.status(200).render('approve.html', { state: 'expired. resend approve from mykee.in app again.' })
-      return;
-    }
-  });
+      }else{
+        res.status(200).render('approve.html', { state: 'expired. resend approve from mykee.in app again.' })
+        return;
+      }
+    });
+}
 }
 
 function sendEmailApprove(email,approveId,res){
