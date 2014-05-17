@@ -18,12 +18,22 @@ exports.newUser = function (req, res, next) {
   var email = req.body.email;
   var registerId = req.body.registerId;
   var os = req.query.os;
-  var newApprove = new Approve({ email:email, registerId:registerId, os:os });
-  newApprove.save(function (err,approve) {
-    if (err){
+  User.findOne({ email:email , registerId:registerId },function(err,user){
+    if (err) {
       return next(err);
     }
-    sendEmailApprove(approve.email,approve._id,res);
+    if(user!=null){
+      var ans = { status:'success',data:user };
+      return res.jsonp(ans);
+    }else{
+      var newApprove = new Approve({ email:email, registerId:registerId, os:os });
+      newApprove.save(function (err,approve) {
+        if (err){
+          return next(err);
+        }
+        sendEmailApprove(approve.email,approve._id,res);
+      });
+    }
   });
 };
 
@@ -32,20 +42,14 @@ exports.updateEmail = function (req, res, next) {
   var oldEmail = req.body.oldEmail;
   var registerId = req.body.registerId;
   var os = req.query.os;
-  // User.findOne({ email:oldEmail , registerId:registerId },function(err,user){
-  //   if (err) {
-  //     return next(err);
-  //   }
-    // if(user!=null){
-    //   user.email = newEmail;
-    //   user.save(function (err,user) {
-    //     if (err){
-    //       return next(err);
-    //     }
-    //     var ans = { status:'success',data:user };
-    //     return res.jsonp(ans);
-    //   });
-    // }else{
+  User.findOne({ email:newEmail , registerId:registerId },function(err,user){
+    if (err) {
+      return next(err);
+    }
+    if(user!=null){
+      var ans = { status:'success',data:user };
+      return res.jsonp(ans);
+    }else{
       var newApprove = new Approve({ email:newEmail, registerId:registerId, os:os });
       newApprove.save(function (err,approve) {
         if (err){
@@ -53,8 +57,8 @@ exports.updateEmail = function (req, res, next) {
         }
         sendEmailApprove(approve.email,approve._id,res);
       });
-    // }
-  // });
+    }
+  });
 };
 
 exports.updateRegisterId = function (req, res, next) {
