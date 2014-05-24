@@ -1,7 +1,6 @@
 html, body { 
-	background-image:url('https://s3.amazonaws.com/mykee.in/bg.jpg');
 	background-position:center; 
-	background-color:#02630D;
+	background-color:#E6E6E6;
 }
 .all-in-middle{
 	margin-left: auto;
@@ -10,26 +9,25 @@ html, body {
 }
 .home-bg{
 	position: absolute;
-	padding: 5px;
+	padding: 15px;
 	padding-top: 5px;
-	margin-top: 80px;
+	margin-top: 65px;
 	margin-left: 10px;
 	border:2px solid;
-	border-color:rgba(255,255,255,.3);
+	border-color:rgba(240,240,240,1);
 	border-radius: 5px;
-	background-image:url('https://s3.amazonaws.com/mykee.in/bg.jpg');
 	background-position:center;
 }
 .content-bg{
 	position: absolute;
 	padding: 50px;
-	margin-top: 120px;
+	margin-top: 140px;
 	width: 600px;
+	background-color:#D4E6FC;
 	min-height: 40px;
 	border:2px solid;
-	border-color:rgba(255,255,255,.3);
+	border-color:rgba(46,131,242,1);
 	border-radius: 2px;
-	background-image:url('https://s3.amazonaws.com/mykee.in/bg.jpg');
 	background-position:center;
 }
 .applications-bg{
@@ -39,11 +37,10 @@ html, body {
 }
 .certified-bg{
 	position: absolute;
-	margin-top: 270px;
+	margin-top: 290px;
 	border:2px solid;
-	border-color:rgba(255,255,255,.3);
+	border-color:rgba(240,240,240,1);
 	border-radius: 2px;
-	background-image:url('https://s3.amazonaws.com/mykee.in/bg.jpg');
 	background-position:center;
 }
 .applications-text{	
@@ -63,12 +60,16 @@ html, body {
 	padding-right: 10px;
 }
 .home{
+	vertical-align:middle;
 	font-family:'Source Sans Pro', sans-serif; font-weight:900; 
 	text-transform:uppercase;
 	color:#fff; 
 	text-shadow: 3px 3px 3px #333;
 	font-size:23px;
 	text-decoration:none;
+}
+.logo{
+	vertical-align:middle;
 }
 
 .in{
@@ -85,19 +86,19 @@ html, body {
 }
 .btn{
 	font-family:'Source Sans Pro', sans-serif; font-weight:900;
-	color:#fff; 
+	color:#FAFAFA; 
 	text-transform:uppercase;
 	text-decoration:none;
 	border:2px solid;
-	background-color:rgba(0,0,0,.3);
-	border-color:rgba(255,255,255,.5);
+	background-color:rgba(46,131,242,1);
+	border-color:rgba(166,166,166,1);
 	border-radius: 3px;
 	padding: 5px;
 }
 .text{	
 	font-family:'Source Sans Pro', sans-serif; font-weight:900;
-	color:#eee; 
-	text-shadow: 1px 1px 1px #333;
+	color:#1F1F1F; 
+	text-shadow: 1px 1px 1px #A1A1A1;
 	font-size:15px;
 
 }
