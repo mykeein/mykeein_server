@@ -23,7 +23,7 @@ controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'M
     scope.data.waitingLabelEmail = routeParams.email;
     scope.data.selections = ['decrypt', 'finishDecrypt', 'waiting', 'blocked', 'warned', 'notexist', 'notregistered'];
     scope.data.selection = scope.data.selections[2];
-    scope.data.code = "code";
+    scope.data.code = "Master Key";
     MyKeeInService.sendRequest(routeParams.email, function(ans) {
         scope.data.ans = ans;
         if(scope.data.ans.status=='success'){

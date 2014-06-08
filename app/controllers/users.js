@@ -94,6 +94,8 @@ exports.check = function (req, res, next) {
   var email = req.body.email;
   var registerId = req.body.registerId;
   var os = req.query.os;
+  // var ln = req.query.ln;
+  // console.log("ln:"+ln)
   User.findOne({ email:email, registerId:registerId },function(err,user){
     if (err) {
       return next(err);

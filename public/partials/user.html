@@ -1,7 +1,8 @@
 <div ng-switch on="data.selection">
     <div ng-switch-when="decrypt">
-        <input class="in" type="text" select-all ng-enter="decrypt()" ng-model="data.code" >
-        <button class="btn" ng-click="decrypt()">Decrypt</button>
+        <span class="text">Master Key:</span>
+        <input class="in" type="password" select-all ng-enter="decrypt()" ng-model="data.code" >
+        <button class="btn" ng-click="decrypt()">Unlock</button>
     </div>
     <div class="text-block" ng-switch-when="blocked">
         <span>You have been blocked by {{data.waitingLabelEmail}}</span>
