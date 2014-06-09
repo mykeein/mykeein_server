@@ -18,6 +18,7 @@ exports.newUser = function (req, res, next) {
   var email = req.body.email;
   var registerId = req.body.registerId;
   var os = req.query.os;
+  var ln = req.query.ln;
   User.findOne({ email:email , registerId:registerId },function(err,user){
     if (err) {
       return next(err);
@@ -31,7 +32,7 @@ exports.newUser = function (req, res, next) {
         if (err){
           return next(err);
         }
-        sendEmailApprove(approve.email,approve._id,res);
+        sendEmailApprove(ln,approve.email,approve._id,res);
       });
     }
   });
@@ -42,6 +43,7 @@ exports.updateEmail = function (req, res, next) {
   var oldEmail = req.body.oldEmail;
   var registerId = req.body.registerId;
   var os = req.query.os;
+  var ln = req.query.ln;
   User.findOne({ email:newEmail , registerId:registerId },function(err,user){
     if (err) {
       return next(err);
@@ -55,7 +57,7 @@ exports.updateEmail = function (req, res, next) {
         if (err){
           return next(err);
         }
-        sendEmailApprove(approve.email,approve._id,res);
+        sendEmailApprove(ln,approve.email,approve._id,res);
       });
     }
   });
@@ -65,6 +67,7 @@ exports.updateRegisterId = function (req, res, next) {
   var email = req.body.email;
   var registerId = req.body.registerId;
   var os = req.query.os;
+  var ln = req.query.ln;
   User.findOne({ email:email },function(err,user){
     if (err) {
       return next(err);
@@ -84,7 +87,7 @@ exports.updateRegisterId = function (req, res, next) {
         if (err){
           return next(err);
         }
-        sendEmailApprove(approve.email,approve._id,res);
+        sendEmailApprove(ln,approve.email,approve._id,res);
       });
     }
   });
@@ -94,8 +97,7 @@ exports.check = function (req, res, next) {
   var email = req.body.email;
   var registerId = req.body.registerId;
   var os = req.query.os;
-  // var ln = req.query.ln;
-  // console.log("ln:"+ln)
+  var ln = req.query.ln;
   User.findOne({ email:email, registerId:registerId },function(err,user){
     if (err) {
       return next(err);
@@ -117,7 +119,7 @@ exports.check = function (req, res, next) {
             if (err){
               return next(err);
             }
-            sendEmailApprove(email,approve._id,res);
+            sendEmailApprove(ln,email,approve._id,res);
           });
         }
       });
@@ -165,25 +167,21 @@ exports.approve = function (req, res, next) {
 }
 }
 
-function sendEmailApprove(email,approveId,res){
+function sendEmailApprove(ln,email,approveId,res){
   var domain;
   if(config.ssl){
     domain = config.ssldomain;
   }else{
     domain = config.domain;
   }
-  var sendData = "Approve your account by this " 
-  +"<a href=\""+domain+"/approve/"+approveId+"\">   Link   </a>"
-  +" or from browser by " 
-  +"address:   \""+domain+"/approve/"+approveId+"\"   "
-  +" Not a mykee.in user ?  Ignore this mail."
-  +" Thank you from mykee.in";
+
   var mailOptions = {
-    from: "mykee.in support <mykee.in@gmail.com>",
-    to: email,
-    subject: "mykee.in account approve",
-    html: sendData
+    to: email
   };
+  mailOptions.html = Approve.contentEmail(domain,approveId,ln);
+  mailOptions.subject = Approve.emailSubject(ln);
+  mailOptions.from = Approve.emailFrom(ln);
+
   transport.sendMail(mailOptions, function(error, response){
     if(error){
       console.log(error);
