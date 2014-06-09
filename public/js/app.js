@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('mykeein', ['mykeein.filters', 'mykeein.services', 'mykeein.directives', 'mykeein.controllers', 'ngClipboard']).
-config(['ngClipProvider', '$routeProvider', '$locationProvider', function(ngClipProvider, $routeProvider,$locationProvider) {
+angular.module('mykeein', ['mykeein.filters', 'mykeein.services', 'mykeein.directives', 'mykeein.controllers', 'ngClipboard', 'pascalprecht.translate']).
+config(['ngClipProvider', '$routeProvider', '$locationProvider', '$translateProvider', function(ngClipProvider, $routeProvider,$locationProvider, $translateProvider) {
 	$routeProvider
 	.when('/', {templateUrl: 'partials/main.html', controller: 'mykeein.controllers.main'})
 	.when('/:email', {templateUrl: 'partials/user.html', controller: 'mykeein.controllers.user'})
@@ -9,4 +9,20 @@ config(['ngClipProvider', '$routeProvider', '$locationProvider', function(ngClip
 	ngClipProvider.setPath("/lib/ZeroClipboard.swf");
 	$locationProvider.html5Mode(true);
 	$locationProvider.hashPrefix('!');
+	$translateProvider.translations('en', {
+		UNLOCK: 'Unlock',
+		REQUEST: 'Request',
+		BUTTON_TEXT_EN: 'English',
+		BUTTON_TEXT_RU: 'Russian'
+	})
+	.translations('ru', {
+		HELLO: 'Отпереть',
+		REQUEST: 'Запрос',
+		BUTTON_TEXT_EN: 'Английский',
+		BUTTON_TEXT_RU: 'Русский'
+	});
+	$translateProvider.preferredLanguage('en');
 }]);
+
+//https://www.youtube.com/watch?v=9CWifOK_Wi8&noredirect=1
+//http://www.ng-newsletter.com/posts/angular-translate.html
