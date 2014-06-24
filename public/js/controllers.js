@@ -4,7 +4,11 @@
 
 var controllers = angular.module('mykeein.controllers', []);
 
-controllers.controller('mykeein.controllers.app', ['$scope', function(scope) {
+controllers.controller('mykeein.controllers.app', ['$scope', '$translate', function(scope, $translate) {
+
+    scope.changeLanguage = function (langKey) {
+        $translate.use(langKey);
+    };
 }]);
 
 controllers.controller('mykeein.controllers.main', ['$scope', '$location', function(scope, location) {
@@ -16,7 +20,7 @@ controllers.controller('mykeein.controllers.main', ['$scope', '$location', funct
     };
 }]);
 
-controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'MyKeeInService', 'TranslateController', function(scope, routeParams, MyKeeInService, $translate) {
+controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'MyKeeInService', function(scope, routeParams, MyKeeInService) {
     scope.keyValue = ['00','01','02','03','04','05','06','07','08','09','0a','0b','0c','0d','0e','0f'];
     scope.data = {};
     scope.data.ansContent = '';
@@ -73,10 +77,5 @@ controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'M
         var decrypt = aesUtil.decrypt(salt, iv, passPhrase, cipherText);
         scope.data.ansContent = decrypt;
         scope.data.selection = scope.data.selections[1];
-    };
-
-    scope.changeLanguage = function (langKey) {
-        console.log(langKey);
-        $translate.use(langKey);
     };
 }]);
