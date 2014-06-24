@@ -3,7 +3,7 @@
   "description": "store all your passwords in mobile application",
   "version": "0.0.1",
   "private": false,
-  "author": "Nickolay Vasyukov <daburmilo@gmail.com> (https://github.com/dabur/keiin.git)",
+  "author": "Nickolay Vasyukov <daburmilo@gmail.com> (https://github.com/mykeein/mykeein_server.git)",
   "engines": {
     "node": "0.10.x",
     "npm": "1.2.x"
