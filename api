@@ -1,0 +1,62 @@
+new user registration
+	Method: POST
+	URL: /api/user/new
+	body: { "email":email , "registerId":registerId }
+
+	ans: 1) { "status":"success" , "data":{ "email":email , "registerId":registerId } }
+		 2) { "status":"not_approved" }
+		 3) { "status":"send_approve_email_failed" }
+
+update user registerId
+	Method: POST
+	URL: /api/user/updateregisterid
+	body: { "email":email , "registerId":registerId }
+
+	ans: 1) { "status":"success" , "data":{ "email":email , "registerId":registerId } }
+		 2) { "status":"not_approved" }
+		 3) { "status":"send_approve_email_failed" }
+
+update user email
+	Method: POST
+	URL: /api/user/updateemail
+	body: { "newEmail":newEmail , "oldEmail":oldEmail , "registerId":registerId }
+
+	ans: 1) { "status":"success" , "data":{ "email":email , "registerId":registerId } }
+		 2) { "status":"not_approved" }
+		 3) { "status":"send_approve_email_failed" }
+
+check user registartion
+	Method: POST
+	URL: /api/user/check
+	body: { "email":email , "registerId":registerId }
+
+	ans: 1) { "status":"success" }
+		 2) { "status":"not_approved" }
+		 3) { "status":"send_approve_email_failed" }
+
+load requests
+	Method: POST
+	URL: /api/requests/load
+	body: { "email":email }
+
+	ans:[ { "_id":_id , "ip":ip , "updated":updated } ]
+
+block user
+	Method: POST
+	URL: /api/requests/block
+	body: { "email":email , "registerId":registerId , "ip":ip }
+
+warn request
+	Method: POST
+	URL: /api/requests/warn
+	body: { "email":email , "registerId":registerId , "requestId":requestId }
+
+warn all requests
+	Method: POST
+	URL: /api/requests/warnall
+	body: { "email":email , "registerId":registerId , "ip":ip }
+
+response on request
+	Method: POST
+	URL: /api/requests/send
+	body: { "email":email , "registerId":registerId , "requestId":requestId , "data":EncryptedData }
