@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mykeein', ['mykeein.filters', 'mykeein.services', 'mykeein.directives', 'mykeein.controllers', 'ngClipboard', 'pascalprecht.translate']).
+angular.module('mykeein', ['ngCookies', 'mykeein.filters', 'mykeein.services', 'mykeein.directives', 'mykeein.controllers', 'ngClipboard', 'pascalprecht.translate']).
 config(['ngClipProvider', '$routeProvider', '$locationProvider', '$translateProvider', function(ngClipProvider, $routeProvider,$locationProvider, $translateProvider) {
 	$routeProvider
 	.when('/', {templateUrl: 'partials/main.html', controller: 'mykeein.controllers.main'})
@@ -16,12 +16,13 @@ config(['ngClipProvider', '$routeProvider', '$locationProvider', '$translateProv
 		BUTTON_TEXT_RU: 'Russian'
 	})
 	.translations('ru', {
-		HELLO: 'Отпереть',
+		UNLOCK: 'Отпереть',
 		REQUEST: 'Запрос',
 		BUTTON_TEXT_EN: 'Английский',
 		BUTTON_TEXT_RU: 'Русский'
 	});
 	$translateProvider.preferredLanguage('en');
+	$translateProvider.useCookieStorage();
 }]);
 
 //https://www.youtube.com/watch?v=9CWifOK_Wi8&noredirect=1
