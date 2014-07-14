@@ -129,6 +129,7 @@ exports.check = function (req, res, next) {
 
 exports.approve = function (req, res, next) {
   var approveId = req.params.approveId;
+  var ln = req.query.ln;
   if(approveId == null || approveId.length != 24){
     res.status(200).render('approve.html', { state: 'expired. resend approve from mykee.in app again.' });
     return;
@@ -154,13 +155,15 @@ exports.approve = function (req, res, next) {
               if (err){
                 return next(err);
               }
-              res.status(200).render('approve.html', { state: 'success ! Thank you using mykee.in' })
+              var successMsg = Approve.successMsg(ln);
+              res.status(200).render('approve.html', { state: successMsg })
               return;
             });
           });
         });
       }else{
-        res.status(200).render('approve.html', { state: 'expired. resend approve from mykee.in app again.' })
+        var expiredMsg = Approve.expiredMsg(ln);
+        res.status(200).render('approve.html', { state: expiredMsg })
         return;
       }
     });
