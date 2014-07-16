@@ -18,11 +18,11 @@ config(['ngClipProvider', '$routeProvider', '$locationProvider', '$translateProv
 		MASTER_KEY: 'Master Key:',
 		COPY: 'Copy',
 		CLEAR_CLIPBOARD: 'Clear Clipboard',
-		WAITING_FOR: 'Waiting for ',
-		YOU_BLOCKED: 'You have been blocked by',
-		WARNING: 'Warning message from',
-		NOT_EXISTS: 'not exist',
-		NOT_REGISTERED: 'not approved yet'
+		WAITING_FOR: 'Awaiting for ',
+		YOU_BLOCKED: 'You have been blocked by ',
+		WARNING: 'Warning message from ',
+		NOT_EXISTS: 'does not exist',
+		NOT_REGISTERED: 'was not approved yet'
 	})
 	.translations('ru', {
 		UNLOCK: 'Отпереть',

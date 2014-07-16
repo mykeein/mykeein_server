@@ -14,7 +14,7 @@
 
  var emailSubjects = {};
 
- emailSubjects.en = "mykee.in account approve";
+ emailSubjects.en = "Approved Account on Mykeein";
 
  emailSubjects.ru =  "утверждение пользователя mykee.in";
 
@@ -34,13 +34,13 @@
 
  var successMsgs = {};
  
- successMsgs.en = "Approve: success ! Thank you using mykee.in";
+ successMsgs.en = "Your account is now active, thank for you using Mykeein";
 
  successMsgs.ru = "Ваш электронный адрес успешно подтвержден ! Спасибо что выбрали mykee.in";
 
  var expiredMsgs = {};
  
- expiredMsgs.en = "Approve: expired. resend approve from mykee.in app again.";
+ expiredMsgs.en = "Approve request is expired, please log in to Mykeein app and request an approval once again";
 
  expiredMsgs.ru = "Линк утверждения устарел. пришлите заново утверждение , из настроек аппликации.";
 
