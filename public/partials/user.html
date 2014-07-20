@@ -1,27 +1,29 @@
-<div ng-switch on="data.selection">
-    <div ng-switch-when="decrypt">
-        <span class="text">{{ 'MASTER_KEY' | translate }}</span>
-        <input class="in" type="password" select-all ng-enter="decrypt()" ng-model="data.code" >
-        <button class="btn" ng-click="decrypt()">{{ 'UNLOCK' | translate }}</button>
-    </div>
-    <div class="text-block" ng-switch-when="blocked">
-        <span>{{ 'YOU_BLOCKED' | translate }} {{data.waitingLabelEmail}}</span>
-    </div>
-    <div class="text-warn" ng-switch-when="warned">
-        <span>{{ 'WARNING' | translate }} {{data.waitingLabelEmail}}</span>
-    </div>
-    <div ng-switch-when="finishDecrypt">
-        <span class="text" >{{data.ansContent}}</span>
-        <button class="btn" clip-copy="data.ansContent">{{ 'COPY' | translate }}</button>
-        <button class="btn" clip-clear>{{ 'CLEAR_CLIPBOARD' | translate }}</button>
-    </div>
-    <div class="text" ng-switch-when="notexist">
-        <span>{{data.waitingLabelEmail}} </span>{{ 'NOT_EXISTS' | translate }}
-    </div>
-    <div class="text" ng-switch-when="notregistered">
-        <span>{{data.waitingLabelEmail}} </span>{{ 'NOT_REGISTERED' | translate }}
-    </div>
-    <div class="text" ng-switch-default>
-        <span>{{ 'WAITING_FOR' | translate }} {{data.waitingLabelEmail}}...</span>
+<div ng-controller="UserController">
+    <div ng-switch on="data.selection">
+        <div ng-switch-when="decrypt">
+            <span class="text">{{ 'MASTER_KEY' | translate }}</span>
+            <input class="in" type="password" select-all ng-enter="decrypt()" ng-model="data.code" >
+            <button class="btn" ng-click="decrypt()">{{ 'UNLOCK' | translate }}</button>
+        </div>
+        <div class="text-block" ng-switch-when="blocked">
+            <span>{{ 'YOU_BLOCKED' | translate }} {{data.waitingLabelEmail}}</span>
+        </div>
+        <div class="text-warn" ng-switch-when="warned">
+            <span>{{ 'WARNING' | translate }} {{data.waitingLabelEmail}}</span>
+        </div>
+        <div ng-switch-when="finishDecrypt">
+            <span class="text">{{data.ansContent}}</span>
+            <button class="btn" clip-copy="data.ansContent">{{ 'COPY' | translate }}</button>
+            <button class="btn" clip-clear>{{ 'CLEAR_CLIPBOARD' | translate }}</button>
+        </div>
+        <div class="text" ng-switch-when="notexist">
+            <span>{{data.waitingLabelEmail}} </span>{{ 'NOT_EXISTS' | translate }}
+        </div>
+        <div class="text" ng-switch-when="notregistered">
+            <span>{{data.waitingLabelEmail}} </span>{{ 'NOT_REGISTERED' | translate }}
+        </div>
+        <div class="text" ng-switch-default>
+            <span>{{ 'WAITING_FOR' | translate }} {{data.waitingLabelEmail}}...</span>
+        </div>
     </div>
 </div>

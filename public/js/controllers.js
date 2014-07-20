@@ -1,5 +1,4 @@
 'use strict';
-
 /* Controllers */
 
 var controllers = angular.module('mykeein.controllers', []);
@@ -19,10 +18,14 @@ controllers.controller('mykeein.controllers.main', ['$scope', '$location', funct
         location.path("/"+scope.data.inputEmail);
     };
 }]);
+controllers.controller('mykeein.controllers.user', ['$scope',function(scope) {
 
-controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'MyKeeInService', function(scope, routeParams, MyKeeInService) {
+}]);
+
+controllers.controller('UserController', ['$scope', '$routeParams', 'MyKeeInService', function(scope, routeParams, MyKeeInService) {
     scope.keyValue = ['00','01','02','03','04','05','06','07','08','09','0a','0b','0c','0d','0e','0f'];
     scope.data = {};
+    scope.data.ttt = "test text in UserController";
     scope.data.ansContent = '';
     scope.data.waitingLabelEmail = routeParams.email;
     scope.data.selections = ['decrypt', 'finishDecrypt', 'waiting', 'blocked', 'warned', 'notexist', 'notregistered'];
@@ -44,6 +47,11 @@ controllers.controller('mykeein.controllers.user', ['$scope', '$routeParams', 'M
             scope.data.selection = scope.data.selections[6];
         }
     });
+
+    scope.cleanAns = function() {
+        console.log("cleanAns");
+        scope.data.ansContent = 'NaN';
+    }
 
     scope.waitTillResponse = function(requestId) {
         setTimeout(function(){
