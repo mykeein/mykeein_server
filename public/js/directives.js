@@ -51,6 +51,7 @@ directives.directive('clipCopy', function () {
 	return {
 		scope: {
 			clipCopy: '&',
+			myValue: '=myData',
 			clipClick: '&'
 		},
 		restrict: 'A',
@@ -61,17 +62,21 @@ directives.directive('clipCopy', function () {
 	        	var onMousedown = function (event) {
 	        		console.log('copy');
 	        		event.setText(scope.$eval(scope.clipCopy));
+	        		setTimeout(function() {
+	        			console.log("auto clean");
+	        			event.setText("");
+	        			scope.myValue.ansContent = "";
+	        			scope.$apply();
+	        		}, 15000);
 	        		if (angular.isDefined(attrs.clipClick)) {
 	        			scope.$apply(scope.clipClick);
 	        		}
-	            	// setTimeout(function() { console.log("clipboard clean"); event.setText('timeout'); }, 15000);
-	            };
-	            client.on('mousedown', onMousedown);
-
-	            scope.$on('$destroy', function() {
-	            	client.off('mousedown', onMousedown);
-	            	client.unclip(element);
-	            });
+	        	};
+	        	client.on('mousedown', onMousedown);
+	        	scope.$on('$destroy', function() {
+	        		client.off('mousedown', onMousedown);
+	        		client.unclip(element);
+	        	});
 	        });
 	    }
 	};
@@ -80,21 +85,22 @@ directives.directive('clipCopy', function () {
 
 directives.directive('clipClean', function() {
 	return {
-		restrict: 'A',
-		controller: function($scope, $element){
-			$scope.data.ansContent = $scope.data.ansContent;
+		scope: {
+			clipClean: '&',
+			myValue: '=myData',
+			clipClick: '&'
 		},
+		restrict: 'A',
 		link: function(scope, element, attr) {
 			var clip = new ZeroClipboard(element);
 			clip.on( 'load', function(client) {
 				var onMousedown = function (event) {
-					console.log('clearbtn');
+					console.log('clean');
 					event.setText("");
-					scope.data.ansContent = "";
+					scope.myValue.ansContent = "";
 					scope.$apply();
 				};
 				client.on('mousedown', onMousedown);
-
 				scope.$on('$destroy', function() {
 					client.off('mousedown', onMousedown);
 					client.unclip(element);
