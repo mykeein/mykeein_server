@@ -12,9 +12,9 @@
             <span>{{ 'WARNING' | translate }} {{data.waitingLabelEmail}}</span>
         </div>
         <div ng-switch-when="finishDecrypt">
-            <span class="text">{{data.ansContent}}</span>
+            <span class="text" ng-bind="data.ansContent"></span>
             <button class="btn" clip-copy="data.ansContent">{{ 'COPY' | translate }}</button>
-            <button class="btn" clip-clear>{{ 'CLEAR_CLIPBOARD' | translate }}</button>
+            <button class="btn" clip-clean>{{ "CLEAR" | translate }}</button>
         </div>
         <div class="text" ng-switch-when="notexist">
             <span>{{data.waitingLabelEmail}} </span>{{ 'NOT_EXISTS' | translate }}

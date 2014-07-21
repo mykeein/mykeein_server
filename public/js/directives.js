@@ -47,36 +47,7 @@ directives.directive('selectAll', function () {
 	};
 });
 
-directives.directive('clipClear', ['$window', function ($window) {
-	return {
-		scope: {
-			clipClear: '&',
-			clipClick: '&'
-		},
-		restrict: 'A',
-		link: function (scope, element, attrs) {
-        // Create the clip object
-        var clip1 = new ZeroClipboard(element);
-        clip1.on( 'load', function(client) {
-        	var onMousedown1 = function (event) {
-        		console.log('clear');
-        		event.setText("");
-        		if (angular.isDefined(attrs.clipClick)) {
-        			scope.$apply(scope.clipClick);
-        		}
-        	};
-        	client.on('mousedown', onMousedown1);
-
-        	scope.$on('$destroy', function() {
-        		client.off('mousedown', onMousedown1);
-        		client.unclip(element);
-        	});
-        });
-    }
-};
-}]);
-
-directives.directive('clipCopy', ['$window', function ($window) {
+directives.directive('clipCopy', function () {
 	return {
 		scope: {
 			clipCopy: '&',
@@ -84,23 +55,51 @@ directives.directive('clipCopy', ['$window', function ($window) {
 		},
 		restrict: 'A',
 		link: function (scope, element, attrs) {
-        // Create the clip object
-        var clip2 = new ZeroClipboard(element);
-        clip2.on( 'load', function(client) {
-        	var onMousedown2 = function (event) {
-        		console.log('copy');
-        		event.setText(scope.$eval(scope.clipCopy));
-        		if (angular.isDefined(attrs.clipClick)) {
-        			scope.$apply(scope.clipClick);
-            }// setTimeout(function() { console.log("clipboard clean"); event.setText('timeout'); }, 15000);
-        };
-        client.on('mousedown', onMousedown2);
+	        // Create the clip object
+	        var clip = new ZeroClipboard(element);
+	        clip.on( 'load', function(client) {
+	        	var onMousedown = function (event) {
+	        		console.log('copy');
+	        		event.setText(scope.$eval(scope.clipCopy));
+	        		if (angular.isDefined(attrs.clipClick)) {
+	        			scope.$apply(scope.clipClick);
+	        		}
+	            	// setTimeout(function() { console.log("clipboard clean"); event.setText('timeout'); }, 15000);
+	            };
+	            client.on('mousedown', onMousedown);
 
-        scope.$on('$destroy', function() {
-        	client.off('mousedown', onMousedown2);
-        	client.unclip(element);
-        });
-    });
-    }
-};
-}]);
+	            scope.$on('$destroy', function() {
+	            	client.off('mousedown', onMousedown);
+	            	client.unclip(element);
+	            });
+	        });
+	    }
+	};
+});
+
+
+directives.directive('clipClean', function() {
+	return {
+		restrict: 'A',
+		controller: function($scope, $element){
+			$scope.data.ansContent = $scope.data.ansContent;
+		},
+		link: function(scope, element, attr) {
+			var clip = new ZeroClipboard(element);
+			clip.on( 'load', function(client) {
+				var onMousedown = function (event) {
+					console.log('clearbtn');
+					event.setText("");
+					scope.data.ansContent = "";
+					scope.$apply();
+				};
+				client.on('mousedown', onMousedown);
+
+				scope.$on('$destroy', function() {
+					client.off('mousedown', onMousedown);
+					client.unclip(element);
+				});
+			});
+		}
+	}
+});
