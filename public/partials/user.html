@@ -12,9 +12,10 @@
             <span>{{ 'WARNING' | translate }} {{data.waitingLabelEmail}}</span>
         </div>
         <div ng-switch-when="finishDecrypt">
-            <span class="text" ng-bind="data.ansContent"></span>
+            <input class="in" type="text" select-all ng-model="data.ansContent" >
             <button class="btn" clip-copy="data.ansContent" my-data="data">{{ 'COPY' | translate }}</button>
             <button class="btn" clip-clean my-data="data">{{ "CLEAR" | translate }}</button>
+            <span class="text" ng-bind="data.countToClean"></span>
         </div>
         <div class="text" ng-switch-when="notexist">
             <span>{{data.waitingLabelEmail}} </span>{{ 'NOT_EXISTS' | translate }}

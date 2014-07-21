@@ -57,30 +57,39 @@ directives.directive('clipCopy', function () {
 		restrict: 'A',
 		link: function (scope, element, attrs) {
 	        // Create the clip object
+	        var eventCopy;
 	        var clip = new ZeroClipboard(element);
 	        clip.on( 'load', function(client) {
 	        	var onMousedown = function (event) {
 	        		console.log('copy');
+	        		eventCopy = event;
 	        		event.setText(scope.$eval(scope.clipCopy));
-	        		setTimeout(function() {
-	        			console.log("auto clean");
-	        			event.setText("");
-	        			scope.myValue.ansContent = "";
-	        			scope.$apply();
-	        		}, 15000);
 	        		if (angular.isDefined(attrs.clipClick)) {
 	        			scope.$apply(scope.clipClick);
 	        		}
 	        	};
+	        	var clean = function(event){
+	        		setTimeout(function() {
+	        			scope.myValue.countToClean = scope.myValue.countToClean - 1;
+	        			if(scope.myValue.countToClean<1){
+	        				console.log("auto clean");
+	        				if(eventCopy){
+	        					eventCopy.setText("");
+	        				}
+	        				scope.myValue.ansContent = "";
+	        			}else{clean();}
+	        			scope.$apply();
+	        		}, 1000);
+	        	};
+	        	scope.myValue.countToClean = 15;
+	        	clean();
 	        	client.on('mousedown', onMousedown);
 	        	scope.$on('$destroy', function() {
 	        		client.off('mousedown', onMousedown);
 	        		client.unclip(element);
 	        	});
 	        });
-	    }
-	};
-});
+}};});
 
 
 directives.directive('clipClean', function() {
