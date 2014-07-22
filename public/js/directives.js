@@ -73,6 +73,7 @@ directives.directive('clipCopy', function () {
 	        			scope.myValue.countToClean = scope.myValue.countToClean - 1;
 	        			if(scope.myValue.countToClean<1){
 	        				console.log("auto clean");
+	        				scope.myValue.countToClean = "";
 	        				if(eventCopy){
 	        					eventCopy.setText("");
 	        				}

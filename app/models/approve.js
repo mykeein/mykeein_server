@@ -38,11 +38,19 @@
 
  successMsgs.ru = "Ваш электронный адрес успешно подтвержден ! Спасибо что выбрали mykee.in";
 
+ successMsgs.iw = "החשבון שלך פעיל כעת, תודה שבחרתה להשתמש Mykeein";
+
+ successMsgs.he = "החשבון שלך פעיל כעת, תודה שבחרתה להשתמש Mykeein";
+
  var expiredMsgs = {};
  
- expiredMsgs.en = "Approve request is expired, please log in to Mykeein app and request an approval once again";
+ expiredMsgs.en = "Approve request is expired, please login to Mykeein app and request an approval once again";
 
  expiredMsgs.ru = "Линк утверждения устарел. пришлите заново утверждение , из настроек аппликации.";
+ 
+ expiredMsgs.iw = "אשור פג תוקף, אנא היכנס לאפליקצית Mykeein ותבקש אישור שוב";
+ 
+ expiredMsgs.he = "אשור פג תוקף, אנא היכנס לאפליקצית Mykeein ותבקש אישור שוב";
 
  var ApproveSchema = new Schema({
  	email:{type:String, required: true},

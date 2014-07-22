@@ -43,6 +43,7 @@ app.config(
 			REQUEST: 'Request',
 			BUTTON_TEXT_EN: 'English',
 			BUTTON_TEXT_RU: 'Russian',
+			BUTTON_TEXT_HE: 'Hebrew',
 			EMAIL_HINT: 'email',
 			MASTER_KEY: 'Master Key:',
 			COPY: 'Copy',
@@ -58,6 +59,7 @@ app.config(
 			REQUEST: 'Запрос',
 			BUTTON_TEXT_EN: 'Английский',
 			BUTTON_TEXT_RU: 'Русский',
+			BUTTON_TEXT_HE: 'Иврит',
 			EMAIL_HINT: 'адрес э-почты',
 			MASTER_KEY: 'Мастер Ключ:',
 			COPY: 'Копировать',
@@ -67,6 +69,38 @@ app.config(
 			WARNING: 'Предупреждение сообщение от',
 			NOT_EXISTS: 'не существует',
 			NOT_REGISTERED: 'еще не утвержден'
+		});
+		$translateProvider.translations('iw', {
+			UNLOCK: 'לפענח',
+			REQUEST: 'לבקש',
+			BUTTON_TEXT_EN: 'אנגלית',
+			BUTTON_TEXT_RU: 'רוסית',
+			BUTTON_TEXT_HE: 'עברית',
+			EMAIL_HINT: 'דוא"ל',
+			MASTER_KEY: 'מפתח מאסטר:',
+			COPY: 'העתק',
+			CLEAR: 'לנקות',
+			WAITING_FOR: 'ממתין לתשובה',
+			YOU_BLOCKED: 'נחסמת על ידי ',
+			WARNING: 'הודעת אזהרה מ ',
+			NOT_EXISTS: 'לא קיימת',
+			NOT_REGISTERED: 'עדיין לא אושר'
+		});
+		$translateProvider.translations('he', {
+			UNLOCK: 'לפענח',
+			REQUEST: 'לבקש',
+			BUTTON_TEXT_EN: 'אנגלית',
+			BUTTON_TEXT_RU: 'רוסית',
+			BUTTON_TEXT_HE: 'עברית',
+			EMAIL_HINT: 'דוא"ל',
+			MASTER_KEY: 'מפתח מאסטר:',
+			COPY: 'העתק',
+			CLEAR: 'לנקות',
+			WAITING_FOR: 'ממתין לתשובה',
+			YOU_BLOCKED: 'נחסמת על ידי ',
+			WARNING: 'הודעת אזהרה מ ',
+			NOT_EXISTS: 'לא קיימת',
+			NOT_REGISTERED: 'עדיין לא אושר'
 		});
 		$translateProvider.preferredLanguage('en');
 		$translateProvider.useCookieStorage();

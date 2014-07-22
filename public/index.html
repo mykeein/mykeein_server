@@ -23,15 +23,9 @@
 	<script src="https://s3.amazonaws.com/mykee.in/lib/angular/bootstrap.min.js"></script>
 	<script src="https://s3.amazonaws.com/mykee.in/lib/ZeroClipboard.min.js"></script>
 	<script src="https://s3.amazonaws.com/mykee.in/lib/angular/angular.js"></script>
-
-	<script src="lib/angular/angular-cookies.min.js"></script>
-	<!--<script src="https://s3.amazonaws.com/mykee.in/lib/angular/angular-cookies.min.js"></script>-->
-
-	<script src="lib/angular/angular-translate.js"></script>
-	<!--<script src="https://s3.amazonaws.com/mykee.in/lib/angular/angular-translate.js"></script>-->
-
-	<script src="lib/angular/angular-translate-storage-cookie.min.js"></script>
-	<!--<script src="https://s3.amazonaws.com/mykee.in/lib/angular/angular-translate-storage-cookie.min.js"></script>-->
+	<script src="https://s3.amazonaws.com/mykee.in/lib/angular/angular-cookies.min.js"></script>
+	<script src="https://s3.amazonaws.com/mykee.in/lib/angular/angular-translate.js"></script>
+	<script src="https://s3.amazonaws.com/mykee.in/lib/angular/angular-translate-storage-cookie.min.js"></script>
 
 	<script src="https://s3.amazonaws.com/mykee.in/lib/angular/angular-resource.js"></script>
 	<script src="https://s3.amazonaws.com/mykee.in/lib/angular/angular-strap.js"></script>
@@ -43,18 +37,26 @@
 	<link rel="stylesheet" href="https://s3.amazonaws.com/mykee.in/css/mykeein.css">
 	<!-- <link rel="stylesheet" href="css/mykeein.css"> -->
 
-	<script src="js/conf.js"></script>
+	<!-- <script src="js/conf.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/services.js"></script>
 	<script src="js/controllers.js"></script>
 	<script src="js/filters.js"></script>
-	<script src="js/directives.js"></script> 
+	<script src="js/directives.js"></script>  -->
+
+	<script src="https://s3.amazonaws.com/mykee.in/js/conf.js"></script>
+	<script src="https://s3.amazonaws.com/mykee.in/js/app.js"></script>
+	<script src="https://s3.amazonaws.com/mykee.in/js/services.js"></script>
+	<script src="https://s3.amazonaws.com/mykee.in/js/controllers.js"></script>
+	<script src="https://s3.amazonaws.com/mykee.in/js/filters.js"></script>
+	<script src="https://s3.amazonaws.com/mykee.in/js/directives.js"></script> 
 </head>
 <body ng-controller="mykeein.controllers.app">
 
 	<div>
-		<button ng-click="changeLanguage('ru')" translate="BUTTON_TEXT_RU"></button>
-		<button ng-click="changeLanguage('en')" translate="BUTTON_TEXT_EN"></button>
+		<img ng-click="changeLanguage('ru')" src="https://s3.amazonaws.com/mykee.in/img/ru.png" ng-hide="ru" title="{{'BUTTON_TEXT_RU' | translate}}">
+		<img ng-click="changeLanguage('en')" src="https://s3.amazonaws.com/mykee.in/img/en.png" ng-hide="en" title="{{'BUTTON_TEXT_EN' | translate}}">
+		<img ng-click="changeLanguage('he')" src="https://s3.amazonaws.com/mykee.in/img/he.png" ng-hide="he" title="{{'BUTTON_TEXT_HE' | translate}}">
 	</div>
 
 	<div class="all-in-middle">
