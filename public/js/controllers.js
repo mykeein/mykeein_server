@@ -5,15 +5,8 @@ var controllers = angular.module('mykeein.controllers', []);
 
 controllers.controller('mykeein.controllers.app', ['$scope', '$translate', function(scope, $translate) {
 
-    scope.ru = $translate.preferredLanguage()=='ru';
-    scope.en = $translate.preferredLanguage()=='en';
-    scope.he = $translate.preferredLanguage()=='he';
-
     scope.changeLanguage = function (langKey) {
         $translate.use(langKey);
-        scope.ru = langKey=='ru';
-        scope.en = langKey=='en';
-        scope.he = langKey=='he';
     };
 }]);
 
