@@ -108,6 +108,7 @@ directives.directive('clipClean', function() {
 					console.log('clean');
 					event.setText("");
 					scope.myValue.ansContent = "";
+					scope.myValue.countToClean = 0;
 					scope.$apply();
 				};
 				client.on('mousedown', onMousedown);
