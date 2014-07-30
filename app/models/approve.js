@@ -14,9 +14,9 @@
 
  var emailSubjects = {};
 
- emailSubjects.en = "Approved Account on Mykeein";
+ emailSubjects.en = "Approve mykee.in Account";
 
- emailSubjects.ru =  "утверждение пользователя mykee.in";
+ emailSubjects.ru =  "Подтверждение пользователя mykee.in";
 
  emailSubjects.iw = "אשר חשבון mykee.in";
 
@@ -34,23 +34,23 @@
 
  var successMsgs = {};
  
- successMsgs.en = "Your account is now active, thank for you using Mykeein";
+ successMsgs.en = "Your account is now active, thank for you using mykee.in";
 
- successMsgs.ru = "Ваш электронный адрес успешно подтвержден ! Спасибо что выбрали mykee.in";
+ successMsgs.ru = "Теперь ваш пользователь активен, спасибо что воспользовались mykee.in";
 
- successMsgs.iw = "החשבון שלך פעיל כעת, תודה שבחרתה להשתמש Mykeein";
+ successMsgs.iw = "החשבון שלך פעיל כעת, תודה שבחרתה להשתמש mykee.in";
 
- successMsgs.he = "החשבון שלך פעיל כעת, תודה שבחרתה להשתמש Mykeein";
+ successMsgs.he = "החשבון שלך פעיל כעת, תודה שבחרתה להשתמש mykee.in";
 
  var expiredMsgs = {};
  
- expiredMsgs.en = "Approve request is expired, please login to Mykeein app and request an approval once again";
+ expiredMsgs.en = "Approve request is expired, please login to mykee.in app and request an approval once again";
 
- expiredMsgs.ru = "Линк утверждения устарел. пришлите заново утверждение , из настроек аппликации.";
+ expiredMsgs.ru = "Срок на ваш запрос истек, пожалуйста, войдите в mykee.in приложение и повторите запрос";
  
- expiredMsgs.iw = "אשור פג תוקף, אנא היכנס לאפליקצית Mykeein ותבקש אישור שוב";
+ expiredMsgs.iw = "אשור פג תוקף, אנא היכנס לאפליקצית mykee.in ותבקש/י אישור שוב";
  
- expiredMsgs.he = "אשור פג תוקף, אנא היכנס לאפליקצית Mykeein ותבקש אישור שוב";
+ expiredMsgs.he = "אשור פג תוקף, אנא היכנס לאפליקצית mykee.in ותבקש/י אישור שוב";
 
  var ApproveSchema = new Schema({
  	email:{type:String, required: true},

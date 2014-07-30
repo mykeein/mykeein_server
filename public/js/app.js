@@ -64,11 +64,11 @@ app.config(
 			MASTER_KEY: 'Мастер Ключ:',
 			COPY: 'Копировать',
 			CLEAR: 'Очистить',
-			WAITING_FOR: 'В ожидании ',
+			WAITING_FOR: 'В ожидании ответа от ',
 			YOU_BLOCKED: 'Вы были заблокированы пользователем',
-			WARNING: 'Предупреждение сообщение от',
+			WARNING: 'Вы предупреждены пользователем',
 			NOT_EXISTS: 'не существует',
-			NOT_REGISTERED: 'еще не утвержден'
+			NOT_REGISTERED: 'не был подтвержден'
 		});
 		$translateProvider.translations('iw', {
 			UNLOCK: 'לפענח',
