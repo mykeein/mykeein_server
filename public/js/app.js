@@ -83,7 +83,7 @@ app.config(
 			WAITING_FOR: 'ממתין לתשובה',
 			YOU_BLOCKED: 'נחסמת על ידי ',
 			WARNING: 'הודעת אזהרה מ ',
-			NOT_EXISTS: 'לא קיימת',
+			NOT_EXISTS: 'לא קיים',
 			NOT_REGISTERED: 'עדיין לא אושר'
 		});
 		$translateProvider.translations('he', {
@@ -99,7 +99,7 @@ app.config(
 			WAITING_FOR: 'ממתין לתשובה',
 			YOU_BLOCKED: 'נחסמת על ידי ',
 			WARNING: 'הודעת אזהרה מ ',
-			NOT_EXISTS: 'לא קיימת',
+			NOT_EXISTS: 'לא קיים',
 			NOT_REGISTERED: 'עדיין לא אושר'
 		});
 		$translateProvider.preferredLanguage('en');
