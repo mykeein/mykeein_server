@@ -19,8 +19,8 @@ gcm.on('transmissionError', function(err) {
 var env = process.env.NODE_ENV;
 var apn = require('apn');
 var serviceIOS = new apn.connection({
-	key: '../../ssl/ios-cert/key.pem',
-	cert: '../../ssl/ios-cert/cert.pem',
+	key: '../../ssl/ios-cert/production-key.pem',
+	cert: '../../ssl/ios-cert/production-cert.pem',
 	gateway: env!=="production"?'gateway.sandbox.push.apple.com':'gateway.push.apple.com'
 });
 
