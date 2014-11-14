@@ -95,24 +95,32 @@ html, body {
 	border-radius: 3px;
 	padding: 5px;
 }
+.btn:active{
+	font-family:'Source Sans Pro', sans-serif; font-weight:900;
+	color:#FAFAFA; 
+	text-transform:uppercase;
+	text-decoration:none;
+	border:2px solid;
+	background-color:rgba(46,131,242,1);
+	border-color:rgba(230,230,230,1);
+	border-radius: 3px;
+	padding: 5px;
+}
 .text{	
 	font-family:'Source Sans Pro', sans-serif; font-weight:900;
 	color:#1F1F1F; 
 	text-shadow: 1px 1px 1px #A1A1A1;
 	font-size:15px;
-
 }
 .text-warn{	
 	font-family:'Source Sans Pro', sans-serif; font-weight:900;
 	color:#F7B00A; 
 	text-shadow: 1px 1px 1px #333;
 	font-size:15px;
-
 }
 .text-block{	
 	font-family:'Source Sans Pro', sans-serif; font-weight:900;
 	color:#FF0000; 
 	text-shadow: 1px 1px 1px #333;
 	font-size:15px;
-
 }

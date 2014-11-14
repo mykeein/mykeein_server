@@ -46,3 +46,77 @@ directives.directive('selectAll', function () {
 		}
 	};
 });
+
+directives.directive('clipCopy', function () {
+	return {
+		scope: {
+			clipCopy: '&',
+			myValue: '=myData',
+			clipClick: '&'
+		},
+		restrict: 'A',
+		link: function (scope, element, attrs) {
+	        // Create the clip object
+	        var eventCopy;
+	        var clip = new ZeroClipboard(element);
+	        clip.on( 'load', function(client) {
+	        	var onMousedown = function (event) {
+	        		console.log('copy');
+	        		eventCopy = event;
+	        		event.setText(scope.$eval(scope.clipCopy));
+	        		if (angular.isDefined(attrs.clipClick)) {
+	        			scope.$apply(scope.clipClick);
+	        		}
+	        	};
+	        	var clean = function(event){
+	        		setTimeout(function() {
+	        			scope.myValue.countToClean = scope.myValue.countToClean - 1;
+	        			if(scope.myValue.countToClean<1){
+	        				console.log("auto clean");
+	        				scope.myValue.countToClean = "";
+	        				if(eventCopy){
+	        					eventCopy.setText("");
+	        				}
+	        				scope.myValue.ansContent = "";
+	        			}else{clean();}
+	        			scope.$apply();
+	        		}, 1000);
+	        	};
+	        	scope.myValue.countToClean = 15;
+	        	clean();
+	        	client.on('mousedown', onMousedown);
+	        	scope.$on('$destroy', function() {
+	        		client.off('mousedown', onMousedown);
+	        		client.unclip(element);
+	        	});
+	        });
+}};});
+
+
+directives.directive('clipClean', function() {
+	return {
+		scope: {
+			clipClean: '&',
+			myValue: '=myData',
+			clipClick: '&'
+		},
+		restrict: 'A',
+		link: function(scope, element, attr) {
+			var clip = new ZeroClipboard(element);
+			clip.on( 'load', function(client) {
+				var onMousedown = function (event) {
+					console.log('clean');
+					event.setText("");
+					scope.myValue.ansContent = "";
+					scope.myValue.countToClean = 0;
+					scope.$apply();
+				};
+				client.on('mousedown', onMousedown);
+				scope.$on('$destroy', function() {
+					client.off('mousedown', onMousedown);
+					client.unclip(element);
+				});
+			});
+		}
+	}
+});

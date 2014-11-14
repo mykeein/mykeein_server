@@ -1,28 +1,107 @@
 'use strict';
 
-angular.module('mykeein', ['mykeein.filters', 'mykeein.services', 'mykeein.directives', 'mykeein.controllers', 'ngClipboard', 'pascalprecht.translate']).
-config(['ngClipProvider', '$routeProvider', '$locationProvider', '$translateProvider', function(ngClipProvider, $routeProvider,$locationProvider, $translateProvider) {
-	$routeProvider
-	.when('/', {templateUrl: 'partials/main.html', controller: 'mykeein.controllers.main'})
-	.when('/:email', {templateUrl: 'partials/user.html', controller: 'mykeein.controllers.user'})
-	.otherwise({redirectTo: '/'});
-	ngClipProvider.setPath("/lib/ZeroClipboard.swf");
-	$locationProvider.html5Mode(true);
-	$locationProvider.hashPrefix('!');
-	$translateProvider.translations('en', {
-		UNLOCK: 'Unlock',
-		REQUEST: 'Request',
-		BUTTON_TEXT_EN: 'English',
-		BUTTON_TEXT_RU: 'Russian'
-	})
-	.translations('ru', {
-		HELLO: 'Отпереть',
-		REQUEST: 'Запрос',
-		BUTTON_TEXT_EN: 'Английский',
-		BUTTON_TEXT_RU: 'Русский'
+var app = angular.module('mykeein', 
+	[
+	'ngCookies', 
+	'mykeein.filters', 
+	'mykeein.services', 
+	'mykeein.directives', 
+	'mykeein.controllers', 
+	'pascalprecht.translate'
+	]);
+
+app.run(['$document', function($document) {
+	ZeroClipboard.config({
+		moviePath: '//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/1.3.2/ZeroClipboard.swf',
+		trustedDomains: ["*"],
+		allowScriptAccess: "always",
+		forceHandCursor: true
 	});
-	$translateProvider.preferredLanguage('en');
 }]);
 
-//https://www.youtube.com/watch?v=9CWifOK_Wi8&noredirect=1
-//http://www.ng-newsletter.com/posts/angular-translate.html
+app.config(
+	[
+	'$routeProvider', 
+	'$locationProvider', 
+	'$translateProvider', 
+	function($routeProvider,$locationProvider, $translateProvider) {
+		$routeProvider.when('/', { 
+			templateUrl: 'partials/main.html', 
+			controller: 'mykeein.controllers.main'
+		});
+		$routeProvider.when('/:email', { 
+			templateUrl: 'partials/user.html', 
+			controller: 'mykeein.controllers.user'
+		});
+		$routeProvider.otherwise({
+			redirectTo: '/'
+		});
+		$locationProvider.html5Mode(true);
+		$locationProvider.hashPrefix('!');
+		$translateProvider.translations('en', {
+			UNLOCK: 'Unlock',
+			REQUEST: 'Request',
+			BUTTON_TEXT_EN: 'English',
+			BUTTON_TEXT_RU: 'Русский',
+			BUTTON_TEXT_HE: 'עברית',
+			EMAIL_HINT: 'email',
+			MASTER_KEY: 'Master Key:',
+			COPY: 'Copy',
+			CLEAR: 'Clear',
+			WAITING_FOR: 'Awaiting for ',
+			YOU_BLOCKED: 'You have been blocked by ',
+			WARNING: 'Warning message from ',
+			NOT_EXISTS: 'does not exist',
+			NOT_REGISTERED: 'was not approved yet'
+		});
+		$translateProvider.translations('ru', {
+			UNLOCK: 'Отпереть',
+			REQUEST: 'Запрос',
+			BUTTON_TEXT_EN: 'English',
+			BUTTON_TEXT_RU: 'Русский',
+			BUTTON_TEXT_HE: 'עברית',
+			EMAIL_HINT: 'адрес э-почты',
+			MASTER_KEY: 'Мастер Ключ:',
+			COPY: 'Копировать',
+			CLEAR: 'Очистить',
+			WAITING_FOR: 'В ожидании ответа от ',
+			YOU_BLOCKED: 'Вы были заблокированы пользователем',
+			WARNING: 'Вы предупреждены пользователем',
+			NOT_EXISTS: 'не существует',
+			NOT_REGISTERED: 'не был подтвержден'
+		});
+		$translateProvider.translations('iw', {
+			UNLOCK: 'לפענח',
+			REQUEST: 'לבקש',
+			BUTTON_TEXT_EN: 'English',
+			BUTTON_TEXT_RU: 'Русский',
+			BUTTON_TEXT_HE: 'עברית',
+			EMAIL_HINT: 'דוא"ל',
+			MASTER_KEY: 'מפתח מאסטר:',
+			COPY: 'העתק',
+			CLEAR: 'לנקות',
+			WAITING_FOR: 'ממתין לתשובה',
+			YOU_BLOCKED: 'נחסמת על ידי ',
+			WARNING: 'הודעת אזהרה מ ',
+			NOT_EXISTS: 'לא קיים',
+			NOT_REGISTERED: 'עדיין לא אושר'
+		});
+		$translateProvider.translations('he', {
+			UNLOCK: 'לפענח',
+			REQUEST: 'לבקש',
+			BUTTON_TEXT_EN: 'English',
+			BUTTON_TEXT_RU: 'Русский',
+			BUTTON_TEXT_HE: 'עברית',
+			EMAIL_HINT: 'דוא"ל',
+			MASTER_KEY: 'מפתח מאסטר:',
+			COPY: 'העתק',
+			CLEAR: 'לנקות',
+			WAITING_FOR: 'ממתין לתשובה',
+			YOU_BLOCKED: 'נחסמת על ידי ',
+			WARNING: 'הודעת אזהרה מ ',
+			NOT_EXISTS: 'לא קיים',
+			NOT_REGISTERED: 'עדיין לא אושר'
+		});
+		$translateProvider.preferredLanguage('en');
+		$translateProvider.useCookieStorage();
+	}]);
