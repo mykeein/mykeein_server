@@ -1,3 +1,5 @@
+//os, ln queries to every request
+
 new user registration
 	Method: POST
 	URL: /api/user/new
@@ -7,6 +9,7 @@ new user registration
 		 2) { "status":"not_approved" }
 		 3) { "status":"send_approve_email_failed" }
 
+//not in use
 update user registerId
 	Method: POST
 	URL: /api/user/updateregisterid
@@ -46,11 +49,13 @@ block user
 	URL: /api/requests/block
 	body: { "email":email , "registerId":registerId , "ip":ip }
 
+//ignore
 warn request
 	Method: POST
 	URL: /api/requests/warn
 	body: { "email":email , "registerId":registerId , "requestId":requestId }
 
+//clean
 warn all requests
 	Method: POST
 	URL: /api/requests/warnall
