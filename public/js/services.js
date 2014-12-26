@@ -6,7 +6,7 @@ var services = angular.module('mykeein.services', ['ngResource']);
 
 services.value('version', MConf.version);
 
-services.value('domain', MConf.domain);
+services.value('domain',' MConf.domain');
 
 services.value('name', MConf.name);
 

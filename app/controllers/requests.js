@@ -1,3 +1,6 @@
+var fs = require('fs'),
+    path = require('path');
+
 var mongoose = require('mongoose')
 , Request = mongoose.model('Request')
 , Approve = mongoose.model('Approve')
@@ -19,10 +22,31 @@ gcm.on('transmissionError', function(err) {
 var env = process.env.NODE_ENV;
 var apn = require('apn');
 var serviceIOS = new apn.connection({
-	key: '../../ssl/ios-cert/production-key.pem',
-	cert: '../../ssl/ios-cert/production-cert.pem',
-	gateway: env!=="production"?'gateway.sandbox.push.apple.com':'gateway.push.apple.com'
+	key: __dirname + '/../../ssl/ios-cert/production-key.pem',
+	cert: __dirname + '/../../ssl/ios-cert/production-cert.pem',
+	gateway: env!=="production"?'gateway.push.apple.com':'gateway.push.apple.com' //'gateway.sandbox.push.apple.com'
 });
+serviceIOS.on('connected', function() {
+    console.log("Connected");
+});
+
+serviceIOS.on('transmitted', function(notification, device) {
+    console.log("Notification transmitted to:" + device.token.toString('hex'));
+});
+
+serviceIOS.on('transmissionError', function(errCode, notification, device) {
+    console.error("Notification caused error: " + errCode + " for device ", device, notification);
+});
+
+serviceIOS.on('timeout', function () {
+    console.log("Connection Timeout");
+});
+
+serviceIOS.on('disconnected', function() {
+    console.log("Disconnected from APNS");
+});
+
+serviceIOS.on('socketError', console.error);
 
 //(60 * 1000 = min)
 var cleanInterval = 10 * 60 * 1000; 
@@ -91,8 +115,9 @@ exports.request = function(req, res, next){
 						}
 						if(user.os==User.os.ios){
 							var note = new apn.notification();
-							note.setAlertText(request);
+							note.setAlertText('request');
 							note.setSound('alert.caf');
+							console.log('puuuuushing',user.registerId);
 							serviceIOS.pushNotification(note, user.registerId);
 						}
 						var ans4 = { status:'success',data:request };
