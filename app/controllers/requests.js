@@ -117,7 +117,7 @@ exports.request = function(req, res, next){
 							var note = new apn.notification();
 							note.setAlertText('request');
 							note.setSound('alert.caf');
-							console.log('puuuuushing',user.registerId);
+							//console.log('puuuuushing',user.registerId);
 							serviceIOS.pushNotification(note, user.registerId);
 						}
 						var ans4 = { status:'success',data:request };
